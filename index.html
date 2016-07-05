@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <title>&lt;hello-world&gt;</title>
+
+    <!-- Imports polyfill -->
+    <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <!-- Imports custom element -->
+    <link rel="import" href="./accord-text.html">
+    <link rel="import" href="./accord-card.html">
+
+    <style>
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!-- Runs custom element -->
+<hello-world url="./doc/person.md"></hello-world>
+
+<div class="container">
+    <accord-card url="./doc/person.md"></accord-card>
+    <accord-card url="./doc/location.md"></accord-card>
+</div>
+
+
+</body>
+</html>

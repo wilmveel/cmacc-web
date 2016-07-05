@@ -1,0 +1,101 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../flip-card/flip-card.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<link rel="import" href="./accord-text.html">
+<link rel="import" href="./accord-form.html">
+
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+<!-- Defines element markup -->
+<dom-module id="accord-card">
+
+    <style is="custom-style" include="iron-flex"></style>
+
+    <style>
+
+        :host {
+            margin: 20px;
+        }
+
+        paper-card {
+            width: 100%;
+        }
+
+        flip-card {
+
+        }
+    </style>
+
+    <template>
+        <flip-card id="flip" nohover>
+
+            <front id="front">
+
+                <paper-card id="frontCard">
+                    <div class="card-content">
+                        <accord-text id="text" url="{{url}}" data="{{data}}"></accord-text>
+                    </div>
+                    <div class="card-actions">
+                        <paper-button on-tap="flipClick">Flip</paper-button>
+                    </div>
+                </paper-card>
+
+            </front>
+
+            <back id="back">
+
+                <paper-card id="backCard">
+                    <div class="card-content">
+                        <accord-form id="form" data="{{data}}"></accord-form>
+                    </div>
+                    <div class="card-actions">
+                        <paper-button on-tap="flipClick">Flip</paper-button>
+                    </div>
+                </paper-card>
+
+            </back>
+
+        </flip-card>
+    </template>
+</dom-module>
+
+
+<script>
+    Polymer({
+        is: 'accord-card',
+
+        properties: {
+            url: String
+        },
+
+        calculateHeight: function () {
+            if (!this.$.flip.flipped) {
+                this.$.flip.style.height = this.$.frontCard.offsetHeight + 'px';
+            } else {
+                this.$.flip.style.height = this.$.backCard.offsetHeight + 'px';
+            }
+        },
+
+        attached: function () {
+
+            this.calculateHeight();
+
+            this.$.flip.addEventListener('flipend', function () {
+                this.calculateHeight();
+            }.bind(this));
+
+            this.$.text.addEventListener('loaded', function () {
+                this.calculateHeight();
+            }.bind(this));
+        },
+
+        flipClick: function (e) {
+            this.$.flip.toggle();
+        }
+
+    });
+</script>

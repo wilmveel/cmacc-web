@@ -1,0 +1,34 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<!-- Defines element markup -->
+<dom-module id="accord-form">
+
+    <template>
+        <template is="dom-repeat" id="menu" items="{{fields()}}">
+            {{item}}
+        </template>
+    </template>
+</dom-module>
+
+<script src="../markdown-js/dist/markdown.js"></script>
+<!-- Registers custom element -->
+<script>
+    Polymer({
+        is: 'accord-form',
+        properties: {
+            data: Object,
+        },
+
+        attached: function () {
+            console.log("Data", this.data)
+        },
+
+        fields: function () {
+           /* this.data.forEach(function(key, value){
+                console.log(key, value);
+            })*/
+        }
+    });
+</script>

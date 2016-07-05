@@ -1,0 +1,76 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<!-- Defines element markup -->
+<dom-module id="accord-text">
+
+    <template>
+        <iron-ajax
+                id="ajax"
+                url="{{url}}"
+                handle-as="text"
+                on-response="handleResponse"
+                debounce-duration="300"></iron-ajax>
+        <div id="content"></div>
+    </template>
+</dom-module>
+
+<script src="../marked/lib/marked.js"></script>
+<!-- Registers custom element -->
+<script>
+    Polymer({
+        is: 'accord-text',
+        properties: {
+            url: String,
+            data: {
+                type: Object,
+                notify: true
+            }
+        },
+
+        attached: function () {
+            this.$.ajax.generateRequest();
+        },
+
+        parseData: function (markdown) {
+
+            REGEX_LINE = /^\$ (.*) = ["']?([\w\s]*)["']?$/gm;
+            REGEX_ITEM = /^\$ (.*) = ["']?([\w\s]*)["']?$/;
+
+            this.data = {};
+            markdown.match(REGEX_LINE).forEach(function (x) {
+                var item = x.match(REGEX_ITEM)
+                this.data[item[1]] = item[2];
+            }.bind(this));
+
+            markdown = markdown.replace(REGEX_LINE, '')
+            return markdown
+
+
+        },
+
+        replaceVariable: function (markdown) {
+
+            REGEX = /\{\{([\w\s]+)\}\}/g;
+
+            markdown = markdown.replace(REGEX, function (a, b) {
+                if (this.data[b])
+                    return this.data[b];
+                else
+                    return a;
+            }.bind(this))
+
+            return markdown
+        },
+
+        handleResponse: function (data) {
+            var markdown = data.detail.response;
+            markdown = this.parseData(markdown)
+            markdown = this.replaceVariable(markdown);
+            var html = window.marked(markdown);
+            this.$.content.innerHTML = html;
+            this.fire('loaded');
+        }
+    });
+</script>
