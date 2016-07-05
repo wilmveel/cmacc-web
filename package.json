@@ -4,11 +4,15 @@
   "description": "$name = Willem Veelenturf",
   "main": "index.js",
   "scripts": {
+    "postinstall": "bower install",
+    "start": "node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bower": "^1.7.9",
+    "express": "^4.14.0",
     "marked": "^0.3.5"
   }
 }
