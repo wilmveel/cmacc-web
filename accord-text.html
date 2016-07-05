@@ -6,13 +6,7 @@
 <dom-module id="accord-text">
 
     <template>
-        <iron-ajax
-                id="ajax"
-                url="{{url}}"
-                handle-as="text"
-                on-response="handleResponse"
-                debounce-duration="300"></iron-ajax>
-        <div id="content"></div>
+        <div id="text"></div>
     </template>
 </dom-module>
 
@@ -21,57 +15,26 @@
 <script>
     Polymer({
         is: 'accord-text',
+
         properties: {
             url: String,
-            data: {
-                type: Object
+            text: {
+                type: Object,
+                notify:true,
+                observer: '_textChange'
             }
         },
 
-        attached: function () {
-            this.$.ajax.generateRequest();
+
+        _textChange: function (text) {
+            this.$.text.innerHTML = text;
         },
 
-        parseData: function (markdown) {
-
-            REGEX_LINE = /^\$ (.*) = ["']?([\w\s]*)["']?$/gm;
-            REGEX_ITEM = /^\$ (.*) = ["']?([\w\s]*)["']?$/;
-
-            this.data = {};
-            markdown.match(REGEX_LINE).forEach(function (x) {
-                var item = x.match(REGEX_ITEM)
-                this.data[item[1]] = item[2];
-            }.bind(this));
-
-            this.notifyPath('data', this.data);
-
-            markdown = markdown.replace(REGEX_LINE, '')
-            return markdown
-
-
-        },
-
-        replaceVariable: function (markdown) {
-
-            REGEX = /\{\{([\w\s]+)\}\}/g;
-
-            markdown = markdown.replace(REGEX, function (a, b) {
-                if (this.data[b])
-                    return this.data[b];
-                else
-                    return a;
-            }.bind(this))
-
-            return markdown
-        },
-
-        handleResponse: function (data) {
-            var markdown = data.detail.response;
-            markdown = this.parseData(markdown)
-            markdown = this.replaceVariable(markdown);
-            var html = window.marked(markdown);
-            this.$.content.innerHTML = html;
-            this.fire('loaded');
+        hello: function(text){
+            console.log('pprops11111',text);
+            return text.name
         }
+
+
     });
 </script>

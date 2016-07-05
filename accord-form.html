@@ -9,11 +9,11 @@
 <dom-module id="accord-form">
 
     <template>
-
-
         <form is="iron-form" method="get" action="/" id="submitOptions">
-            <template is="dom-repeat" items="{{fields}}">
-                <paper-input name="name" label="{{item.name}}" value="{{item.value}}" required></paper-input>
+            <template is="dom-repeat" items="{{_toFields(props)}}" observe="props">
+                <paper-input name="{{item.name}}" label="{{item.name}}" value="{{item.value::input}}"
+                             on-change="_changeProp"
+                             required></paper-input>
             </template>
         </form>
     </template>
@@ -21,39 +21,37 @@
 </dom-module>
 
 <script src="../markdown-js/dist/markdown.js"></script>
-<!-- Registers custom element -->
+
 <script>
     Polymer({
+
         is: 'accord-form',
+
         properties: {
-            data: {
+            props: {
                 type: Object,
-                notify: true,
-                observer: '_data'
-            },
-            fields: {
-                type: Array,
-                value: []
+                notify: true
             }
         },
 
         attached: function () {
-
+            console.log('PPP')
         },
 
+        _toFields: function (obj) {
 
+            console.log('lalala', obj, this.props);
+            return Object.keys(obj).map(function (key) {
+                return {
+                    name: key,
+                    value: obj[key]
+                };
+            });
+        },
 
-        _data: function () {
-
-            if (this.data)
-                Object.keys(this.data).forEach(function (key) {
-
-                    this.push('fields', {
-                        key: key,
-                        name: key,
-                        value: this.data[key]
-                    })
-                }.bind(this));
+        _changeProp: function (event) {
+            this.set('props.' + event.target.name, event.target.value)
         }
+
     });
 </script>

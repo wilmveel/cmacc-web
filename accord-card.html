@@ -7,6 +7,7 @@
 
 <link rel="import" href="./accord-text.html">
 <link rel="import" href="./accord-form.html">
+<link rel="import" href="./accord-document.html">
 
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 
@@ -31,13 +32,16 @@
     </style>
 
     <template>
+
+        <accord-document id="accordDocument" url="{{url}}" text="{{text}}" props="{{props}}" ></accord-document>
+
         <flip-card id="flip" nohover>
 
             <front id="front">
 
                 <paper-card id="frontCard">
                     <div class="card-content">
-                        <accord-text id="text" url="{{url}}" data="{{data}}"></accord-text>
+                        <accord-text id="text" props="{{props}}" text="{{text}}"></accord-text>
                     </div>
                     <div class="card-actions">
                         <paper-button on-tap="flipClick">Flip</paper-button>
@@ -50,7 +54,7 @@
 
                 <paper-card id="backCard">
                     <div class="card-content">
-                        <accord-form id="form" data="{{data}}"></accord-form>
+                        <accord-form id="form" props="{{props}}"></accord-form>
                     </div>
                     <div class="card-actions">
                         <paper-button on-tap="flipClick">Flip</paper-button>
@@ -69,12 +73,11 @@
         is: 'accord-card',
 
         properties: {
-            url: String,
-            data: {
-                type: Object,
-                notify: true
-            }
+            url: String
         },
+
+        props:{},
+        text:{},
 
         calculateHeight: function () {
             if (!this.$.flip.flipped) {
@@ -92,14 +95,19 @@
                 this.calculateHeight();
             }.bind(this));
 
-            this.$.text.addEventListener('loaded', function () {
+            this.$.accordDocument.addEventListener('loaded', function () {
                 this.calculateHeight();
             }.bind(this));
+
         },
 
         flipClick: function (e) {
             this.$.flip.toggle();
+
+
         }
+
+
 
     });
 </script>
