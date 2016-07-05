@@ -24,8 +24,7 @@
         properties: {
             url: String,
             data: {
-                type: Object,
-                notify: true
+                type: Object
             }
         },
 
@@ -43,6 +42,8 @@
                 var item = x.match(REGEX_ITEM)
                 this.data[item[1]] = item[2];
             }.bind(this));
+
+            this.notifyPath('data', this.data);
 
             markdown = markdown.replace(REGEX_LINE, '')
             return markdown

@@ -5,5 +5,4 @@ var text = fs.readFileSync('./doc/location.md');
 
 console.log(marked(text.toString()));
 
-
 fs.writeFileSync('./index.html', marked(text.toString()));

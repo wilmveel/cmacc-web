@@ -69,7 +69,11 @@
         is: 'accord-card',
 
         properties: {
-            url: String
+            url: String,
+            data: {
+                type: Object,
+                notify: true
+            }
         },
 
         calculateHeight: function () {
