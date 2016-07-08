@@ -4,7 +4,6 @@
 
 <!-- Defines element markup -->
 <dom-module id="accord-text">
-
     <template>
         <div id="text"></div>
     </template>
@@ -18,21 +17,74 @@
 
         properties: {
             url: String,
+            depth: Number,
             text: {
                 type: Object,
-                notify:true,
+                notify: true,
                 observer: '_textChange'
+            },
+            props: {
+                type: Object,
+                notify: true,
+                observer: '_propsChange'
+            },
+            depth: {
+                type: Number
             }
         },
 
-
         _textChange: function (text) {
-            this.$.text.innerHTML = text;
+            this.$.text.innerHTML = this.replaceVariable(text);
         },
 
-        hello: function(text){
-            console.log('pprops11111',text);
-            return text.name
+        _propsChange: function (props) {
+
+        },
+
+
+        replaceVariable: function (markdown) {
+
+            REGEX = /\{\{([\w\s]+)\}\}/g;
+
+            // Replace variables
+            markdown = markdown.replace(REGEX, function (a, b) {
+                if (this.props[b])
+                    return this.props[b];
+                else
+                    return a;
+            }.bind(this))
+
+            // Remove vars
+            markdown = markdown.replace(REGEX, function (a, b) {
+                if (this.props[b])
+                    return this.props[b];
+                else
+                    return a;
+            }.bind(this));
+
+            // Replace imports
+
+            REGEX_IMPORT = /^@ \(([\w]*)\)\s?\[([\.\/\w]*)\]\s?(\{.*\})$/gm;
+            markdown = markdown.replace(REGEX_IMPORT, function (a, b, c, d) {
+                console.log(a, b, c, this.depth)
+                return '<accord-card url="./doc/' + c + '" pros="' + d + '" depth="' + (this.depth + 1) + '"></accord-card>'
+            }.bind(this));
+
+            REGEX_HEADING = /^#(.*)/gm;
+            markdown = markdown.replace(REGEX_HEADING, function (a, b) {
+                console.log(a, this.depth)
+                if(this.depth === 1)
+                    return '##' + b
+                if(this.depth === 2)
+                    return '###' + b
+                if(this.depth === 3)
+                    return '####' + b
+                else
+                    return '#' + b
+            }.bind(this));
+
+
+            return window.marked(markdown);
         }
 
 

@@ -23,7 +23,14 @@
         }
 
         paper-card {
-            width: 100%;
+            width: 800px;
+            margin: 0 -15px;
+
+        }
+
+        paper-card .card-contentf {
+            padding: 0;
+
         }
 
         flip-card {
@@ -41,7 +48,7 @@
 
                 <paper-card id="frontCard">
                     <div class="card-content">
-                        <accord-text id="text" props="{{props}}" text="{{text}}"></accord-text>
+                        <accord-text id="text" props="{{props}}" text="{{text}}" depth="{{depth}}"></accord-text>
                     </div>
                     <div class="card-actions">
                         <paper-button on-tap="flipClick">Flip</paper-button>
@@ -73,7 +80,12 @@
         is: 'accord-card',
 
         properties: {
-            url: String
+            url: String,
+            depth: {
+                type: Number,
+                value: 0
+            },
+            props: Object
         },
 
         props:{},
@@ -95,7 +107,8 @@
                 this.calculateHeight();
             }.bind(this));
 
-            this.$.accordDocument.addEventListener('loaded', function () {
+            document.addEventListener('loaded', function () {
+                console.log('calc');
                 this.calculateHeight();
             }.bind(this));
 

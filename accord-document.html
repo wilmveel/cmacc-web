@@ -54,46 +54,31 @@
             REGEX_ITEM = /^\$ (.*) = ["']?([\w\s]*)["']?$/;
 
             var props = {};
-            markdown.match(REGEX_LINE).forEach(function (x) {
-                var item = x.match(REGEX_ITEM)
-                props[item[1]] = item[2];
-            }.bind(this));
+            if(markdown.match(REGEX_LINE)){
+                markdown.match(REGEX_LINE).forEach(function (x) {
+                    var item = x.match(REGEX_ITEM)
+                    props[item[1]] = item[2];
+                }.bind(this));
+            }
+
 
             return props;
 
-
-        }
-        ,
+        },
 
         replaceVariable: function (markdown) {
 
-            REGEX = /\{\{([\w\s]+)\}\}/g;
             REGEX_ITEM = /^\$ (.*) = ["']?([\w\s]*)["']?$/gm;
 
             // Remove variables
             markdown = markdown.replace(REGEX_ITEM, '');
 
-            // Replace variables
-            markdown = markdown.replace(REGEX, function (a, b) {
-                if (this.props[b])
-                    return this.props[b];
-                else
-                    return a;
-            }.bind(this))
-
-            markdown = markdown.replace(REGEX, function (a, b) {
-                if (this.props[b])
-                    return this.props[b];
-                else
-                    return a;
-            }.bind(this))
-
-            return window.marked(markdown);
-        }
-        ,
+            return markdown;
+        },
 
         handleResponse: function (props) {
             this.markdown = props.detail.response;
+            this.props = this.parseData(this.markdown);
             this.props = this.parseData(this.markdown);
             this.text = this.replaceVariable(this.markdown, props);
 

@@ -1,9 +1,5 @@
-$ name = Willem Veelenturf
+$ place = Spanje
 
-$ place = Utrecht
-
-# Location
+## Location
 
 I live in {{place}}
-
-And my name is {{name}}

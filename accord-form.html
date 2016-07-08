@@ -34,13 +34,7 @@
             }
         },
 
-        attached: function () {
-            console.log('PPP')
-        },
-
         _toFields: function (obj) {
-
-            console.log('lalala', obj, this.props);
             return Object.keys(obj).map(function (key) {
                 return {
                     name: key,
