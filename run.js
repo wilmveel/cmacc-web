@@ -14,7 +14,12 @@ cmacc.parse(file, {}, function (err, json) {
     cmacc.render(file, json, function (err, markdown) {
         console.log(markdown)
         var style = '<style>.definedterm {color:yellow}</style>'
-        fs.mkdirSync('./build');
+
+        var stats = fs.lstatSync('./build');
+
+        if(!stats.isDirectory())
+            fs.mkdirSync('./build');
+
         fs.writeFileSync('./build/index.html', style + marked(markdown))
     });
 });
