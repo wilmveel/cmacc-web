@@ -20,10 +20,7 @@ $ investor = null
     "investor" : investor
 }
 
-@ event_equity = [../sec/event/equity.md]
-@ event_liquidity = [../sec/event/liquidity.md]
-@ event_dissolution = [../sec/event/dissolution.md]
-@ event_termination = [../sec/event/termination.md]
+@ event = [../sec/event.md]
 
 @ definitions_capitalStock = [../sec/definitions/capitalStock.md]
 @ definitions_changeOfControl = [../sec/definitions/changeOfControl.md]
@@ -50,15 +47,7 @@ $ investor = null
 
 {{intro}}
 
-1. **Events**
-    1. **{{def.Equity_Financing}}**  
-        {{event_equity}}  
-    2. **{{def.Liquidity_Event}}**  
-        {{event_liquidity}}  
-    3. **{{def.Equity_Financing}}**  
-        {{event_dissolution}}**  
-    4. **{{def.Equity_Financing}}**  
-        {{event_termination}}
+1. {{event}}
 
 2. **Definitions**
     > {{definitions_capitalStock}}  

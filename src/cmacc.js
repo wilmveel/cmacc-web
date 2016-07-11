@@ -16,7 +16,7 @@ function queryJson(json, key){
     var current = json;
     var keys = key.split('.');
 
-    //console.log(key, json);
+    console.log(key, json);
 
     for (var i in keys) {
 
