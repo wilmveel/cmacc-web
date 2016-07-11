@@ -16,7 +16,7 @@ function queryJson(json, key){
     var current = json;
     var keys = key.split('.');
 
-    console.log(key, json);
+    //console.log(key, json);
 
     for (var i in keys) {
 
@@ -148,10 +148,6 @@ var cmacc = {
                 text = text.replace(new RegExp(REGEX_VARIABLE, 'g'), '');
                 text = text.replace(new RegExp(REGEX_IMPORT, 'g'), '');
                 text = text.replace(new RegExp(REGEX_INJECT, 'g'), function (found, enter, prefix, key) {
-
-                    if(prefix){
-                        console.log("prefix", '-' + prefix + '-', res[key].replace(/^/gm, prefix))
-                    }
 
                     if (res[key]) {
                         var inject = res[key];

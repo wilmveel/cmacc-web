@@ -6,20 +6,23 @@ var marked = require('marked');
 
 var cmacc = require('./src/cmacc');
 
+var input = process.argv[2];
+var output = process.argv[3] || 'index.html';
 
-var file = path.join(__dirname, process.argv[2]);
+var file = path.join(__dirname, input);
 
 cmacc.parse(file, {}, function (err, json) {
     if(err) throw err;
     cmacc.render(file, json, function (err, markdown) {
-        console.log(markdown)
+
         var style = '<style>.definedterm {color:yellow}</style>'
 
-        var stats = fs.lstatSync('./build');
+        if(!fs.existsSync(path.join(__dirname, 'build')))
+            fs.mkdirSync(path.join(__dirname, 'build'));
 
-        if(!stats.isDirectory())
-            fs.mkdirSync('./build');
+        fs.writeFileSync(path.join(__dirname, 'build', output), style + marked(markdown))
 
-        fs.writeFileSync('./build/index.html', style + marked(markdown))
+        console.log(markdown)
+
     });
 });

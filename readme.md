@@ -19,13 +19,19 @@ npm install
 To run the parser use the following command from the root of this project
 
 ```
-node ./run.js <rootfile>.md
+node ./run.js <input> <output>
 ```
 
 Example of ycombinator
 
 ```
 node ./run.js ./doc/acme/angel-round/safe_robinson.md
+```
+
+or
+
+```
+node ./run.js ./doc/acme/angel-round/safe_robinson_v2_.md
 ```
 
 Output will be int foder
