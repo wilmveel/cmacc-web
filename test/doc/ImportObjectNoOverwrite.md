@@ -1,0 +1,3 @@
+@ var = [./Object.md]
+
+{{var}}

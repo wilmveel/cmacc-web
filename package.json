@@ -10,8 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.0.0-rc.6",
     "bower": "^1.7.9",
     "express": "^4.14.0",
-    "marked": "^0.3.5"
+    "ipfs": "^0.14.1",
+    "ipfs-api": "^6.0.3",
+    "marked": "^0.3.5",
+    "mkpath": "^1.0.0"
   }
 }

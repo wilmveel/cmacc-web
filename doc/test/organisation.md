@@ -6,7 +6,7 @@ This is a cool organisation
 
 The organisation has three people.
 
-@ (person1) [./person.md] {name:'James Hazard', age:?}
+@ (person1) [./person.md] {name:'James Hazard', age:7}
 
 @ (person3) [./person.md] {name:'Axel Sheele', age:25}
 
