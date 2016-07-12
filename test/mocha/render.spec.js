@@ -31,6 +31,7 @@ describe('parse', function () {
         it('should return object and overwrite', function (done) {
             var file = path.join(root, 'ImportVariable.md');
             cmacc.parse(file, {}, function (err, json) {
+                console.log(json)
                 assert.equal(json.obj.hello, 'World');
                 done();
             });
@@ -62,6 +63,26 @@ describe('parse', function () {
             var file = path.join(root, 'ImportObjectOverwrite.md');
             cmacc.parse(file, {}, function (err, json) {
                 assert.equal(json.obj.obj.hello, 'Hello');
+                done();
+            });
+        });
+    });
+
+    describe('ImportObjectSubstitutionVariable.md', function () {
+        it('should return heading one "Hello World"', function (done) {
+            var file = path.join(root, 'ImportObjectSubstitutionVariable.md');
+            cmacc.parse(file, {}, function (err, json) {
+                assert.equal(json.obj.hello, 'Hello');
+                done();
+            });
+        });
+    });
+
+    describe('ImportObjectSubstitutionObject.md', function () {
+        it('should return heading one "Hello World"', function (done) {
+            var file = path.join(root, 'ImportObjectSubstitutionObject.md');
+            cmacc.parse(file, {}, function (err, json) {
+                assert.equal(json.obj.hello, 'Hello');
                 done();
             });
         });

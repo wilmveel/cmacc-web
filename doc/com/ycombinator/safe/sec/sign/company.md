@@ -5,7 +5,7 @@ $ company = {
 }
 
 
-@ def = [../defined_terms.md]
+$ def = [../defined_terms.md]
 
 **{{company.fullName}}**  
 ({{def.Company}})  

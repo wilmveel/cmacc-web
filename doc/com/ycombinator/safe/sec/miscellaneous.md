@@ -1,4 +1,4 @@
-@ def = [./defined_terms.md]
+$ def = [./defined_terms.md]
 
 1. **Waiver**  
 Any provision of this instrument may be amended, waived or modified only upon the written consent of the {{def.Company}} and the {{def.Investor}}.

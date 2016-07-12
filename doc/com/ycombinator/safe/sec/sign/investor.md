@@ -4,7 +4,7 @@ $ investor = {
     "fullName": null
 }
 
-@ def = [../defined_terms.md]
+$ def = [../defined_terms.md]
 
 **{{investor.fullName}}**  
 ({{def.Investor}})  

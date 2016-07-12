@@ -1,4 +1,4 @@
-@ def = [../defined_terms.md]
+$ def = [../defined_terms.md]
 
 1. **Authority**  
 The {{def.Investor}} has full legal capacity, power and authority to execute and deliver this instrument and to perform its obligations hereunder. This instrument constitutes valid and binding obligation of the {{def.Investor}}, enforceable in accordance with its terms, except as limited by bankruptcy, insolvency or other laws of general application relating to or affecting the enforcement of creditors' rights generally and general principles of equity.

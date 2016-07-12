@@ -10,9 +10,9 @@ $ company = null
 
 $ investor = null
 
-@ def = [../sec/defined_terms.md]
+$ def = [../sec/defined_terms.md]
 
-@ intro = [../sec/intro.md] => {
+$ intro = [../sec/intro.md] => {
     "valuationCap" : valuationCap,
     "amount" : amount,
     "discount" : discount,
@@ -20,30 +20,30 @@ $ investor = null
     "investor" : investor
 }
 
-@ event = [../sec/event.md]
+$ event = [../sec/event.md]
 
-@ definitions_capitalStock = [../sec/definitions/capitalStock.md]
-@ definitions_changeOfControl = [../sec/definitions/changeOfControl.md]
-@ definitions_companyCapitalization = [../sec/definitions/companyCapitalization.md]
-@ definitions_conversionPrice = [../sec/definitions/conversionPrice.md]
-@ definitions_discountPrice = [../sec/definitions/discountPrice.md]
-@ definitions_distribution = [../sec/definitions/distribution.md]
-@ definitions_dissolutionEvent = [../sec/definitions/dissolutionEvent.md]
+$ definitions_capitalStock = [../sec/definitions/capitalStock.md]
+$ definitions_changeOfControl = [../sec/definitions/changeOfControl.md]
+$ definitions_companyCapitalization = [../sec/definitions/companyCapitalization.md]
+$ definitions_conversionPrice = [../sec/definitions/conversionPrice.md]
+$ definitions_discountPrice = [../sec/definitions/discountPrice.md]
+$ definitions_distribution = [../sec/definitions/distribution.md]
+$ definitions_dissolutionEvent = [../sec/definitions/dissolutionEvent.md]
 
-@ representations_company = [../sec/representations/company.md]
-@ representations_investor = [../sec/representations/investor.md]
+$ representations_company = [../sec/representations/company.md]
+$ representations_investor = [../sec/representations/investor.md]
 
-@ sign_company = [../sec/sign/company.md] => {
+$ sign_company = [../sec/sign/company.md] => {
     "ymd" : ymd,
     "company" : company
 }
 
-@ sign_investor = [../sec/sign/investor.md] => {
+$ sign_investor = [../sec/sign/investor.md] => {
     "ymd" : ymd,
     "investor" : investor
 }
 
-@ miscellaneous = [../sec/miscellaneous.md]
+$ miscellaneous = [../sec/miscellaneous.md]
 
 {{intro}}
 

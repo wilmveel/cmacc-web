@@ -8,14 +8,14 @@ $ discount = "8%"
 
 $ company = { 
     "fullName": "Acme Inc.", 
-    "nea": null 
+    "nea": null
 }
 
 $ investor = { 
     "fullName": "Roberta Robinson" 
 }
 
-@ ycombinator = [../../com/ycombinator/safe/form/cap_discount.md] => {
+$ ycombinator = [../../com/ycombinator/safe/form/cap_discount.md] => {
     "amount" : amount,
     "ymd" : ymd,
     "valuationCap" : valuationCap,
