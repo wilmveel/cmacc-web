@@ -1,6 +1,5 @@
 $ obj = {
-    "hel" : "Wor",
-    "lo" : "ld"
+    "hello" : "World"
 }
 
-# Hello {{obj.hel}}{{obj.lo}}
+# Hello {{obj.hello}}

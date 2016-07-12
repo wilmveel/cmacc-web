@@ -1,100 +1,70 @@
 var assert = require('assert');
 var path = require('path');
 
-describe('render', function () {
+describe('parse', function () {
 
     var cmacc = require('../../src/cmacc');
 
-    describe('Variable', function () {
-        it('should return heading one "Hello World"', function (done) {
-            var file = path.join(__dirname, '../doc/', 'Variable.md');
+    var root = path.join(__dirname, '../doc/');
+
+    describe('Variable.md', function () {
+        it('should return variable hello World', function (done) {
+            var file = path.join(root, 'Variable.md');
             cmacc.parse(file, {}, function (err, json) {
-                cmacc.render(file, json, function (err, markdown) {
-                    assert.equal(markdown, '# Hello World')
-                    done();
-
-                });
-
+                assert.equal(json.hello, 'World');
+                done();
             });
-
         });
     });
 
-    describe('Object', function () {
-        it('should return heading one "Hello World"', function (done) {
-            var file = path.join(__dirname, '../doc/', 'Object.md');
+    describe('Object.md', function () {
+        it('should return object hello world', function (done) {
+            var file = path.join(root, 'Object.md');
             cmacc.parse(file, {}, function (err, json) {
-                cmacc.render(file, json, function (err, markdown) {
-                    assert.equal(markdown, '# Hello World')
-                    done();
-
-                });
-
+                assert.equal(json.obj.hello, 'World');
+                done();
             });
-
         });
     });
 
-    describe('ImportVariable', function () {
-        it('should return heading one "Hello World"', function (done) {
-            var file = path.join(__dirname, '../doc/', 'ImportVariable.md');
+    describe('ImportVariable.md', function () {
+        it('should return object and overwrite', function (done) {
+            var file = path.join(root, 'ImportVariable.md');
             cmacc.parse(file, {}, function (err, json) {
-                cmacc.render(file, json, function (err, markdown) {
-                    assert.equal(markdown, '# Hello Hello')
-                    done();
-
-                });
-
+                assert.equal(json.obj.hello, 'World');
+                done();
             });
-
         });
     });
 
-    describe('ImportObject', function () {
+    describe('ImportObject.md', function () {
         it('should return heading one "Hello World"', function (done) {
-            var file = path.join(__dirname, '../doc/', 'ImportObject.md');
+            var file = path.join(root, 'ImportObject.md');
             cmacc.parse(file, {}, function (err, json) {
-                cmacc.render(file, json, function (err, markdown) {
-                    assert.equal(markdown, '# Hello Hello')
-                    done();
-
-                });
-
+                assert.equal(json.obj.obj.hello, 'World');
+                done();
             });
-
         });
     });
 
-    describe('ImportObjectVariable', function () {
+    describe('ImportVariableOverwrite.md', function () {
         it('should return heading one "Hello World"', function (done) {
-            var file = path.join(__dirname, '../doc/', 'ImportObjectVariable.md');
+            var file = path.join(root, 'ImportVariableOverwrite.md');
             cmacc.parse(file, {}, function (err, json) {
-                cmacc.render(file, json, function (err, markdown) {
-                    assert.equal(markdown, '# Hello Hello')
-                    done();
-
-                });
-
+                assert.equal(json.obj.hello, 'Hello');
+                done();
             });
-
         });
     });
 
-
-    describe('ImportObjectNoOverwrite', function () {
+    describe('ImportObjectOverwrite.md', function () {
         it('should return heading one "Hello World"', function (done) {
-            var file = path.join(__dirname, '../doc/', 'ImportObjectNoOverwrite.md');
+            var file = path.join(root, 'ImportObjectOverwrite.md');
             cmacc.parse(file, {}, function (err, json) {
-                cmacc.render(file, json, function (err, markdown) {
-                    assert.equal(markdown, '# Hello World')
-                    done();
-
-                });
-
+                assert.equal(json.obj.obj.hello, 'Hello');
+                done();
             });
-
         });
     });
-
 
 });

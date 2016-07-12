@@ -1,8 +1,3 @@
-@ var = [./Object.md] => {
-    "obj": {
-        "hel" : "Hel",
-        "lo" : "lo"
-    }
-}
+$ obj = [./Object.md]
 
-{{var}}
+{{obj}}

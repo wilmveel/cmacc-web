@@ -1,10 +1,12 @@
-$ hel = "Hel"
+$ test1 = "Hello"
 
-$ lo = {
+$ test2 = {
     "test" : "lo"
 }
 
-@ text = [./Object.md] => {
+$ test3 = [./object.md]
+
+$ test4 = [./object.md] => {
     "obj": {
         "hel" : hel,
         "lo" : lo.test

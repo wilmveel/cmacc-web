@@ -1,5 +1,3 @@
-@ var = [./Variable.md] => {
-    "hello": "Hello"
-}
+$ obj = [./Variable.md]
 
-{{var}}
+{{obj}}
