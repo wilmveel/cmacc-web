@@ -1,3 +1,0 @@
-$ obj = [./Object.md]
-
-{{obj}}

@@ -2,40 +2,28 @@ var fs = require('fs');
 var path = require('path');
 var async = require('async');
 
-var REGEX_VARIABLE = /^\$\s?(\w*)\s?\=\s?(?:\[([\.\w\/]*)\])?(?:\s\=\>\s)?((?:null)|(?:".*")|(?:\{[^}]*[\s?\n?\}]*))?$/gm;
-
-var REGEX_KEYVALUE = /("\w*"\s?:\s?)([\w\.]*)?(?:\[([\.\w\/]*)\])?/g
+var helper = require('./helper');
+var regex = require('./regex');
+var mergeJson = require("merge-json");
 
 
 var cmacc = {
 
     parse: function (file, data, callback) {
 
-        function mergeJson(obj1, obj2) {
-            var result = {};
-            for (var key in obj1) result[key] = obj1[key];
-            for (var key in obj2) result[key] = obj2[key];
-            return result
-        }
-
-        function queryJson(json, key) {
-            var current = json;
-            var keys = key.split('.');
-
-            for (var i in keys) {
-                if (!current[keys[i]] && current[keys[i]] !== null)
-                    throw new Error("cannot find key: " + key);
-                current = current[keys[i]];
-            }
-
-            return current;
-        }
-
         function resolveValue(value, data, callback) {
 
             var match;
+
+            if(!value)
+                return callback(null, value);
+
+            if(match = value.match(/^\"(\w+)\"$/))
+                return callback(null, match[1]);
+
+
             var exec = [];
-            while ((match = REGEX_KEYVALUE.exec(value)) !== null) {
+            while ((match = regex.REGEX_KEYVALUE.exec(value)) !== null) {
                 (function () {
 
                     var found = match[0];
@@ -45,22 +33,19 @@ var cmacc = {
 
                     exec.push(function (callback) {
 
-                        if (val) {
-                            if(val === 'null')
-                                callback(null, key + "null");
-                            else
-                                callback(null, key + "\"" + queryJson(data, val) + "\"");
-                        }
-
-                        else if (ref) {
+                        if (ref) {
                             var location = path.resolve(path.dirname(file), ref)
-                            cmacc.parse(location, null, function (err, res) {
-                                callback(null, key + JSON.stringify(res));
+                            cmacc.parse(location, data, function (err, res) {
+                                 return callback(null, key + " : " + JSON.stringify(res));
                             });
                         }
 
-                        else {
-                            callback(null, found);
+                        if(val) {
+
+
+                            return callback(null, key + " : " + JSON.stringify(helper.queryJson(data, val)));
+
+
                         }
                     })
                 })()
@@ -69,15 +54,12 @@ var cmacc = {
             async.series(exec, function (err, res) {
 
 
-
-                if (err) return callback(err);
-
-                if (!value)
-                    return callback(null, value)
+                if (err)
+                    return callback(err);
 
                 var i = 0;
 
-                value = value.replace(REGEX_KEYVALUE, function (found, key, val, ref) {
+                value = value.replace(regex.REGEX_KEYVALUE, function (found, key, val, ref) {
                     var val = res[i]
                     i++;
                     return val
@@ -98,7 +80,9 @@ var cmacc = {
             var match;
             var exec = {};
             var temp = {};
-            while ((match = REGEX_VARIABLE.exec(text)) !== null) {
+            while ((match = regex.REGEX_VARIABLE.exec(text)) !== null) {
+
+
                 (function () {
 
                     var key = match[1];
@@ -121,8 +105,12 @@ var cmacc = {
                                     if (err) return callback(err);
 
                                     // merge data with parsed value
-                                    if (typeof value === 'object')
-                                        data = mergeJson(data, value);
+                                    if (typeof value === 'object') {
+                                        if (data === null)
+                                            data = value
+                                        else
+                                            data = mergeJson.merge(data, value);
+                                    }
 
                                     callback(null, data);
 
@@ -144,42 +132,47 @@ var cmacc = {
 
         fs.readFile(file, 'utf8', function (err, text) {
 
-            if(err) return callback(err);
+            if (err) return callback(err);
 
+            var match;
             var exec = {};
+            while ((match = regex.REGEX_VARIABLE.exec(text)) !== null) {
+                (function () {
 
-            // replace import
-            text.replace(new RegExp(REGEX_IMPORT, 'g'), function (imprt) {
+                    var key = match[1];
+                    var ref = match[2];
+                    var value = match[3];
 
-                var result = imprt.match(new RegExp(REGEX_IMPORT));
-                var key = result[1];
-                var file2 = path.resolve(path.dirname(file), result[2]);
+                    if (ref) {
+                        var file2 = path.resolve(path.dirname(file), ref);
 
-                exec[key] = function (callback) {
-                    cmacc.render(file2, json[key], function (err, markdown) {
-                        callback(null, markdown)
-                    });
-                };
+                        exec[key] = function (callback) {
+                            cmacc.render(file2, json[key], function (err, markdown) {
+                                callback(null, markdown)
+                            });
+                        };
+                    }
+                })()
+            }
 
-            });
 
             async.parallel(exec, function (err, res) {
 
-                if(err) return callback(err);
+                if (err) return callback(err);
 
-                text = text.replace(new RegExp(REGEX_VARIABLE, 'g'), '');
-                text = text.replace(new RegExp(REGEX_INJECT, 'g'), function (found, enter, prefix, key) {
+                text = text.replace(regex.REGEX_VARIABLE, '');
+                text = text.replace(regex.REGEX_INJECT, function (found, enter, prefix, key) {
 
                     if (res[key]) {
                         var inject = res[key];
 
-                        if(prefix)
+                        if (prefix)
                             inject = inject.replace(/^/gm, prefix);
 
                         return enter + inject;
                     }
                     else {
-                        return queryJson(json, key) || "!!" + key + "!!";
+                        return helper.queryJson(json, key) || "!!" + key + "!!";
                     }
                 });
 
