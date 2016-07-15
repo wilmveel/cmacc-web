@@ -15,11 +15,10 @@ cmacc.parse(file, null, function (err, data) {
 
     if (err) return console.error(err);
 
-    console.log(data)
+    console.log('DATA: ', JSON.stringify(data, null, 4))
 
     cmacc.render(file, data, function (err, text) {
         console.log(text)
-
-
+        fs.writeFile('index.html', marked(text))
     });
 });

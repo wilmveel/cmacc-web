@@ -1,10 +1,17 @@
 var helper = {
 
     mergeJson: function (obj1, obj2) {
-        if(obj2 === null){
-            console.log('lalalala');
+        function walk(obj, base) {
+            for (var key in obj) {
+                if (obj1.hasOwnProperty(key)) {
+                    var val = obj[key];
+                    walk(val, base + '.' + key);
+                    obj1[key] = obj2[key];
+                }
+            }
         }
-        return mergeJson.merge(obj1, obj2)
+        walk(obj1);
+        return obj1
     },
 
     queryJson: function (json, key) {

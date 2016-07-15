@@ -126,6 +126,7 @@ describe('parse', function () {
                             hello1: "World2"
                         }
                     }
+
                 };
                 assert.deepEqual(json, result);
                 done();
@@ -203,10 +204,50 @@ describe('parse', function () {
                         "obj2": {
                             "obj1": {
                                 "hello1": "World3"
-                            },
-                            "hello1": {
-                                "hello1": "World1"
                             }
+                        }
+                    }
+                };
+                assert.deepEqual(json, result);
+                done();
+            });
+        });
+    });
+
+    describe('ImportObjectSubstitutionImportDoubleObject.md', function () {
+        it('should return heading one "Hello World"', function (done) {
+            var file = path.join(root, 'ImportObjectSubstitutionImportDoubleObject.md');
+            cmacc.parse(file, {}, function (err, json) {
+                console.log(JSON.stringify(json, null, 4));
+                var result = {
+                    "obj4": {
+                        "hello4": "World4"
+                    },
+                    "obj3": {
+                        "obj2": {
+                            "obj1": {
+                                "hello1": {
+                                    "hello4": "World4"
+                                }
+                            }
+                        }
+                    }
+                };
+                assert.deepEqual(json, result);
+                done();
+            });
+        });
+    });
+
+    describe('NullImportObjectOverwrite.md', function () {
+        it('should return heading one "Hello World"', function (done) {
+            var file = path.join(root, 'NullImportObjectOverwrite.md');
+            cmacc.parse(file, {}, function (err, json) {
+                console.log(JSON.stringify(json, null, 4));
+                var result = {
+                    "obj2": {
+                        "obj1": {
+                            "hello1": "World2"
                         }
                     }
                 };

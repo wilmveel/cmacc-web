@@ -1,14 +1,14 @@
-$ amount
+$ amount = null
 
-$ ymd
+$ ymd = null
 
-$ discount
+$ discount = null
 
-$ valuationCap
+$ valuationCap = null
 
-$ company
+$ company = null
 
-$ investor
+$ investor = null
 
 $ def = [../sec/defined_terms.md]
 

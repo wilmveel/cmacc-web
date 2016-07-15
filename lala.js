@@ -2,14 +2,16 @@ var mergeJson = require("merge-json");
 
 var obj1 = {
     "obj": {
-        "hello": "Hello"
+        "hello": null
     }
 };
 
 var obj2 = {
     "obj": {
-        "hello": "Hello"
+        "hello": 123
     }
 };
 
-mergeJson.merge(obj1, null)
+var res = mergeJson.merge(obj1, obj2);
+
+console.log(res)

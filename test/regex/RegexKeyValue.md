@@ -1,7 +1,7 @@
 {
     "hello" : {
         "hello" : {
-            "hello" : World
+            "hello" : world
         },
 	"hello" : {
             "hello" : "World"

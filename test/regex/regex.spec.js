@@ -105,7 +105,7 @@ describe('regex', function () {
                 match = regex.REGEX_KEYVALUE.exec(text)
                 console.log("match", match);
                 assert.equal(match[1], '"hello"');
-                assert.equal(match[2], '"World"');
+                assert.equal(match[2], 'world');
 
                 match = regex.REGEX_KEYVALUE.exec(text)
                 console.log("match", match);

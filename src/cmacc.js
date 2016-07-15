@@ -15,18 +15,17 @@ var cmacc = {
 
             var match;
 
-            if(!value)
-                return callback(null, value);
+            if(!value){
+                return callback(null, null);
+            }
 
             if(match = value.match(/^\"(\w+)\"$/))
                 return callback(null, match[1]);
-
 
             var exec = [];
             while ((match = regex.REGEX_KEYVALUE.exec(value)) !== null) {
                 (function () {
 
-                    var found = match[0];
                     var key = match[1];
                     var val = match[2];
                     var ref = match[3];
@@ -41,18 +40,16 @@ var cmacc = {
                         }
 
                         if(val) {
-
-
-                            return callback(null, key + " : " + JSON.stringify(helper.queryJson(data, val)));
-
-
+                            if(val === "null")
+                                return callback(null, key + " : " + "null");
+                            else
+                                return callback(null, key + " : " + JSON.stringify(helper.queryJson(data, val)));
                         }
                     })
                 })()
             }
 
             async.series(exec, function (err, res) {
-
 
                 if (err)
                     return callback(err);
@@ -79,7 +76,6 @@ var cmacc = {
 
             var match;
             var exec = {};
-            var temp = {};
             while ((match = regex.REGEX_VARIABLE.exec(text)) !== null) {
 
 
@@ -91,23 +87,24 @@ var cmacc = {
 
                     exec[key] = function (callback) {
 
-                        resolveValue(value, temp, function (err, value) {
+                        if(data[key])
+                            return callback();
+
+                        resolveValue(value, data, function (err, value) {
 
                             if (!ref) {
-                                temp[key] = value;
+                                data[key] = value;
                                 callback(null, value);
                             }
-
 
                             else {
                                 var location = path.resolve(path.dirname(file), ref)
                                 cmacc.parse(location, value, function (err, data) {
                                     if (err) return callback(err);
 
-                                    // merge data with parsed value
-                                    if (typeof value === 'object') {
+                                    if (value && typeof value === 'object') {
                                         if (data === null)
-                                            data = value
+                                            data = value;
                                         else
                                             data = mergeJson.merge(data, value);
                                     }
@@ -141,14 +138,19 @@ var cmacc = {
 
                     var key = match[1];
                     var ref = match[2];
-                    var value = match[3];
 
                     if (ref) {
+
+
+
                         var file2 = path.resolve(path.dirname(file), ref);
 
                         exec[key] = function (callback) {
+                            if(typeof json[key] === 'string')
+                                return callback(null, json[key]);
+
                             cmacc.render(file2, json[key], function (err, markdown) {
-                                callback(null, markdown)
+                                return callback(null, markdown)
                             });
                         };
                     }
