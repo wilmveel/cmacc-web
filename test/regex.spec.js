@@ -5,9 +5,9 @@ var path = require('path');
 
 describe('regex', function () {
 
-    var regex = require('../../src/regex');
+    var regex = require('../src/regex');
 
-    var root = path.join(__dirname);
+    var root = path.join(__dirname, 'regex');
 
     var check = function(text, callback){
         var match;
@@ -110,8 +110,7 @@ describe('regex', function () {
                 match = regex.REGEX_KEYVALUE.exec(text)
                 console.log("match", match);
                 assert.equal(match[1], '"hello"');
-                assert.equal(match[2], undefined);
-                assert.equal(match[3], './docs.md');
+                assert.equal(match[2], '"World"');
 
                 done()
             });

@@ -17,10 +17,11 @@ $ intro = [../sec/intro.md] => {
     "amount" : amount,
     "discount" : discount,
     "company" : company,
-    "investor" : investor
+    "investor" : investor,
+    "def" : def
 }
 
-$ event = [../sec/event.md]
+$ event = [../sec/event.md] => {"def" : def}
 
 $ definitions_capitalStock = [../sec/definitions/capitalStock.md]
 $ definitions_changeOfControl = [../sec/definitions/changeOfControl.md]

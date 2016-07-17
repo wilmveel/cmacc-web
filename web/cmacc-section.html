@@ -1,0 +1,39 @@
+<!-- Imports polymer -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<!-- Defines element markup -->
+<dom-module id="cmacc-section">
+
+
+</dom-module>
+
+
+<script>
+    Polymer({
+        is: 'cmacc-section',
+
+        properties: {
+            file: String
+        },
+
+        attached: function () {
+            var parent = this.parentNode;
+
+           //console.log(parent, parent.parentNode.tagName)
+
+            parent.addEventListener("mouseover", function(e){
+                console.log(e.target)
+                parent.style.backgroundColor = "#CAE1FF";
+            }, true);
+
+            parent.addEventListener("mouseout", function(e){
+                parent.style.backgroundColor = null;
+            }, true);
+
+            parent.addEventListener("click", function(e){
+                console.log(this.file);
+            }.bind(this), true)
+        }
+
+    });
+</script>

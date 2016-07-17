@@ -7,18 +7,21 @@ var marked = require('marked');
 var cmacc = require('./src/cmacc');
 
 var input = process.argv[2];
-var output = process.argv[3] || 'index.html';
+var output = process.argv[3] || 'build/SAFE_Robinson.html';
 
 var file = path.join(__dirname, input);
 
-cmacc.parse(file, null, function (err, data) {
 
-    if (err) return console.error(err);
+cmacc.compose(file, null, function (err, ast) {
 
-    console.log('DATA: ', JSON.stringify(data, null, 4))
+    fs.writeFileSync('index.json', JSON.stringify(ast, null, 4))
 
-    cmacc.render(file, data, function (err, text) {
+    cmacc.render(ast, function (err, text) {
         console.log(text)
-        fs.writeFile('index.html', marked(text))
+
+        fs.writeFileSync('index.md', text)
+
+        var header = fs.readFileSync('header.html');
+        fs.writeFileSync('index.html', header + marked(text))
     });
 });

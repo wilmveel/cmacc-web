@@ -1,17 +1,9 @@
+var mergeJson = require("merge-json");
+
 var helper = {
 
     mergeJson: function (obj1, obj2) {
-        function walk(obj, base) {
-            for (var key in obj) {
-                if (obj1.hasOwnProperty(key)) {
-                    var val = obj[key];
-                    walk(val, base + '.' + key);
-                    obj1[key] = obj2[key];
-                }
-            }
-        }
-        walk(obj1);
-        return obj1
+        return mergeJson.merge(obj1, obj2);
     },
 
     queryJson: function (json, key) {
@@ -24,6 +16,17 @@ var helper = {
             current = current[keys[i]];
         }
         return current;
+    },
+
+    hashCode: function () {
+        var hash = 0, i, chr, len;
+        if (this.length === 0) return hash;
+        for (i = 0, len = this.length; i < len; i++) {
+            chr = this.charCodeAt(i);
+            hash = ((hash << 5) - hash) + chr;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return hash;
     }
 };
 
