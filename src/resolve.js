@@ -4,32 +4,53 @@ var async = require('async');
 var regex = require('./regex');
 var helper = require('./helper');
 
-var resolve = function (val, data, callback) {
+var resolve = function (variable, ast, callback) {
 
-    var match;
-
-    if (!val) {
-        return callback(null, null);
+    if (!variable.val) {
+        return callback(null, variable);
     }
 
-    if (match = val.match(regex.REGEX_STRING))
-        return callback(null, match[1]);
+    if (variable.val.match(regex.REGEX_STRING)) {
+        variable.type = 'string';
+        return callback(null, variable);
+    }
 
-    var res = val.replace(regex.REGEX_KEYVALUE, function (found, key, val) {
+    ast.variables = ast.variables || {};
 
-        if(val === "null")
-            return key + " : null";
+    variable.val.replace(regex.REGEX_KEYVALUE, function (found, key, val) {
 
-        if (val.match(regex.REGEX_STRING))
-            return key + " : " + val;
+        variable.ast = variable.ast || {};
+        variable.ast.variables = variable.ast.variables || {};
 
-        var res = helper.queryJson(data, val)
-        return key + " : " + JSON.stringify(res)
+        var key = key.match(regex.REGEX_STRING)[1];
 
+        if (val === "null") {
+            variable.ast.variables[key] = {
+                type:'null',
+                key: key,
+                val: null
+            };
+            return found;
+        }
+
+        if (val.match(regex.REGEX_STRING)) {
+            var val = val.match(regex.REGEX_STRING)[1];
+            variable.ast.variables[key] = {
+                type:'string',
+                key: key,
+                val: val
+            };
+            return found;
+        }
+
+        variable.ast.variables[key] = ast.variables[val];
+        variable.ast.variables[key].type = 'ref';
+
+        return found;
 
     });
 
-    callback(null, JSON.parse(res))
+    callback(null, variable)
 };
 
 module.exports = resolve;

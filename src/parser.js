@@ -2,17 +2,17 @@ var fs = require('fs');
 
 var regex = require('./regex');
 
-var parser = function(file, callback){
+var parser = function (file, callback) {
 
     var node = {
         file: file,
-        variables : {},
-        text: null
+        variables: {},
+        text: undefined
     };
 
     fs.readFile(file, 'utf8', function (err, text) {
 
-        if(err) return callback(err)
+        if (err) return callback(err)
 
         text = text.replace(regex.REGEX_VARIABLE, function (found, key, ref, val) {
             node.variables[key] = {
@@ -23,7 +23,8 @@ var parser = function(file, callback){
             return '';
         });
 
-        node.text = text;
+        if (text && text !== '')
+            node.text = text;
 
         callback(null, node);
 

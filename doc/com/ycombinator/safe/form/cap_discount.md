@@ -21,18 +21,23 @@ $ intro = [../sec/intro.md] => {
     "def" : def
 }
 
-$ event = [../sec/event.md] => {"def" : def}
+$ event = [../sec/event.md] => {
+    "def" : def
+}
 
-$ definitions_capitalStock = [../sec/definitions/capitalStock.md]
-$ definitions_changeOfControl = [../sec/definitions/changeOfControl.md]
-$ definitions_companyCapitalization = [../sec/definitions/companyCapitalization.md]
-$ definitions_conversionPrice = [../sec/definitions/conversionPrice.md]
-$ definitions_discountPrice = [../sec/definitions/discountPrice.md]
-$ definitions_distribution = [../sec/definitions/distribution.md]
-$ definitions_dissolutionEvent = [../sec/definitions/dissolutionEvent.md]
+$ definitions_capitalStock = [../sec/definitions/capitalStock.md] => {
+    "def" : def
+}
 
-$ representations_company = [../sec/representations/company.md]
-$ representations_investor = [../sec/representations/investor.md]
+$ definitions_changeOfControl = [../sec/definitions/changeOfControl.md] => {"def" : def}
+$ definitions_companyCapitalization = [../sec/definitions/companyCapitalization.md] => {"def" : def}
+$ definitions_conversionPrice = [../sec/definitions/conversionPrice.md] => {"def" : def}
+$ definitions_discountPrice = [../sec/definitions/discountPrice.md] => {"def" : def}
+$ definitions_distribution = [../sec/definitions/distribution.md] => {"def" : def}
+$ definitions_dissolutionEvent = [../sec/definitions/dissolutionEvent.md] => {"def" : def}
+
+$ representations_company = [../sec/representations/company.md] => {"def" : def}
+$ representations_investor = [../sec/representations/investor.md] => {"def" : def}
 
 $ sign_company = [../sec/sign/company.md] => {
     "ymd" : ymd,

@@ -10,9 +10,19 @@ describe('compose', function () {
     var compose = require('../src/compose');
     var render = require('../src/render');
 
+    describe('Variable.md', function () {
+        it('should parse variable hello World', function (done) {
+            var file = path.join(__dirname, 'parser', 'Variable.md');
+            compose(file, null, function (err, doc) {
+                console.log(JSON.stringify(doc, null, 4));
+                done();
+            });
+        });
+    });
+
     describe('ImportObjectOverwrite.md', function () {
         it('should parse variable hello World', function (done) {
-            var file = path.join(__dirname, 'parser', 'ImportObjectSubstitutionObject.md');
+            var file = path.join(__dirname, 'parser', 'ImportObjectOverwrite.md');
             compose(file, null, function (err, doc) {
                 console.log(JSON.stringify(doc, null, 4));
                 done();
@@ -34,10 +44,12 @@ describe('compose', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(__dirname, '../doc/acme/angel-round', 'SAFE_Robinson.md');
             compose(file, null, function (err, ast) {
+                fs.writeFileSync('index.json', JSON.stringify(ast, null, 4));
+                done();
                 render(ast, function(err, markdown){
                     fs.writeFileSync('index.html',  marked(markdown))
                     console.log(markdown)
-                    done();
+
                 });
             });
         });

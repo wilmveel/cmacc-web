@@ -1,9 +1,20 @@
 $ def = [./defined_terms.md]
 
-$ event_equity = [../sec/event/equity.md] => {"def":def}
-$ event_liquidity = [../sec/event/liquidity.md] => {"def":def}
-$ event_dissolution = [../sec/event/dissolution.md] => {"def":def}
-$ event_termination = [../sec/event/termination.md] => {"def":def}
+$ event_equity = [../sec/event/equity.md] => {
+    "def":def
+}
+
+$ event_liquidity = [../sec/event/liquidity.md] => {
+    "def":def
+}
+
+$ event_dissolution = [../sec/event/dissolution.md] => {
+    "def":def
+}
+
+$ event_termination = [../sec/event/termination.md] => {
+    "def":def
+}
 
 **Events**
     1. **{{def.Equity_Financing}}**  

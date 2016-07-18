@@ -6,16 +6,26 @@ var helper = {
         return mergeJson.merge(obj1, obj2);
     },
 
-    queryJson: function (json, key) {
-        var current = json;
+    queryAst: function (ast, key) {
+        var current = ast;
         var keys = key.split('.');
 
         for (var i in keys) {
-            if (!current.hasOwnProperty(keys[i]))
-                throw new Error("cannot find key: " + key);
-            current = current[keys[i]];
+            var k = keys[i]
+            if (current.variables.hasOwnProperty(k)) {
+                if (current.variables[k].ast) {
+                    current = current.variables[k].ast;
+                }
+            }
+            //else
+            //throw new Error("cannot find key: " + key);
+
         }
-        return current;
+
+        if (current.variables[k])
+            return current.variables[k].val;
+        else
+            return;
     },
 
     hashCode: function () {
