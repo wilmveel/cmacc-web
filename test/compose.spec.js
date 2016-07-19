@@ -44,6 +44,12 @@ describe('compose', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(__dirname, '../doc/acme/angel-round', 'SAFE_Robinson.md');
             compose(file, null, function (err, ast) {
+
+                assert.equal(ast.variables.amount.val, "\"$50,000\"");
+                assert.equal(ast.variables.company.ast.variables.fullName.val, "Acme Inc.");
+
+                assert.equal(ast.variables.def.ast.variables.Company.val, "Willem");
+
                 fs.writeFileSync('index.json', JSON.stringify(ast, null, 4));
                 done();
                 render(ast, function(err, markdown){

@@ -1,4 +1,4 @@
-var mergeJson = require("merge-json");
+var mergeJson = require("./merge");
 
 var helper = {
 
