@@ -12,24 +12,31 @@ var compose = function (file, parent, callback) {
 
     parser(file, function (err, ast) {
 
+
+
         if (err)
             return callback(err);
 
         if (parent) {
+            var variables = [];
+            ast.variables.forEach(function (item, i) {
+                var inject = helper.queryAst(parent, item.key)
+                if (inject)
+                    variables.push(inject);
+                else
+                    variables.push(item);
+            });
+
             parent.file = ast.file;
             parent.text = ast.text;
-            Object.keys(ast.variables).forEach(function (i) {
-                if (!parent.variables[i])
-                    parent.variables[i] = ast.variables[i]
-            });
-            ast = parent
+            parent.variables = variables;
+            ast = parent;
         }
 
         var exec = {};
-        Object.keys(ast.variables).forEach(function (i) {
+        ast.variables.forEach(function (item, i) {
             exec[ast.variables[i].key] = function (callback) {
                 resolve(ast.variables[i], ast, function (err, data) {
-
                     if (ast.variables[i].ref && ast.variables[i].type !== 'ref') {
                         var location = path.resolve(path.dirname(ast.file), ast.variables[i].ref);
                         compose(location, ast.variables[i].ast, function (err, res) {
@@ -41,7 +48,6 @@ var compose = function (file, parent, callback) {
                 });
             }
         });
-
 
         async.series(exec, function (err, variables) {
             callback(null, ast);

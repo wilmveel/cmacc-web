@@ -32,7 +32,8 @@ $ ycombinator = [../../com/ycombinator/safe/form/cap_discount.md] => {
     "valuationCap" : valuationCap,
     "discount" : discount,
     "company" : company,
-    "investor" : investor
+    "investor" : investor,
+    "def" : def
 }
 
 {{ycombinator}}

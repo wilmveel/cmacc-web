@@ -4,9 +4,9 @@ var regex = require('./regex');
 
 var parser = function (file, callback) {
 
-    var node = {
+    var ast = {
         file: file,
-        variables: {},
+        variables: [],
         text: undefined
     };
 
@@ -15,18 +15,18 @@ var parser = function (file, callback) {
         if (err) return callback(err)
 
         text = text.replace(regex.REGEX_VARIABLE, function (found, key, ref, val) {
-            node.variables[key] = {
+            ast.variables.push({
                 key: key,
                 ref: ref,
                 val: val
-            };
+            });
             return '';
         });
 
         if (text && text !== '')
-            node.text = text;
+            ast.text = text;
 
-        callback(null, node);
+        callback(null, ast);
 
     });
 };

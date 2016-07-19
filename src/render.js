@@ -14,13 +14,15 @@ var render = function (ast, callback) {
 
             exec[key] = function (callback) {
 
-                if (ast.variables[key] && ast.variables[key].ast) {
-                    return render(ast.variables[key].ast, function (ast, text) {
+                var res = helper.queryAst(ast, key);
+
+                if (res && res.ast) {
+                    return render(res.ast, function (ast, text) {
                         callback(null, text)
                     });
                 }
 
-                callback(null, helper.queryAst(ast, key) || "!!" + key + "!!");
+                callback(null, res.val || "!!" + key + "!!");
 
             };
             return found;

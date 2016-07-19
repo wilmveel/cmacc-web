@@ -7,25 +7,26 @@ var helper = {
     },
 
     queryAst: function (ast, key) {
+
+        var res = null;
         var current = ast;
+
         var keys = key.split('.');
-
         for (var i in keys) {
-            var k = keys[i]
-            if (current.variables.hasOwnProperty(k)) {
-                if (current.variables[k].ast) {
-                    current = current.variables[k].ast;
+            var key = keys[i]
+            current.variables.forEach(function(v, k){
+                if(v.key === key){
+                    if(current.variables[k]){
+                        res = current.variables[k];
+                    }
+                    if(current.variables[k].ast){
+                        current = current.variables[k].ast;
+                    }
                 }
-            }
-            //else
-            //throw new Error("cannot find key: " + key);
-
+            })
         }
 
-        if (current.variables[k])
-            return current.variables[k].val;
-        else
-            return;
+        return res;
     },
 
     hashCode: function () {
