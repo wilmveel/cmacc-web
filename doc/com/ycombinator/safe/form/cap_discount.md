@@ -41,12 +41,14 @@ $ representations_investor = [../sec/representations/investor.md] => {"def" : de
 
 $ sign_company = [../sec/sign/company.md] => {
     "ymd" : ymd,
-    "company" : company
+    "company" : company,
+    "def" : def
 }
 
 $ sign_investor = [../sec/sign/investor.md] => {
     "ymd" : ymd,
-    "investor" : investor
+    "investor" : investor,
+    "def" : def
 }
 
 $ miscellaneous = [../sec/miscellaneous.md]

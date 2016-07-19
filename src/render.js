@@ -14,7 +14,7 @@ var render = function (ast, callback) {
 
             exec[key] = function (callback) {
 
-                var res = helper.queryAst(ast, key);
+                var res = helper.queryAst(ast, key) || {};
 
                 if (res && res.ast) {
                     return render(res.ast, function (ast, text) {

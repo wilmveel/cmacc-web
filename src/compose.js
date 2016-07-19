@@ -33,9 +33,9 @@ var compose = function (file, parent, callback) {
             ast = parent;
         }
 
-        var exec = {};
+        var exec = [];
         ast.variables.forEach(function (item, i) {
-            exec[ast.variables[i].key] = function (callback) {
+            exec.push(function (callback) {
                 resolve(ast.variables[i], ast, function (err, data) {
                     if (ast.variables[i].ref && ast.variables[i].type !== 'ref') {
                         var location = path.resolve(path.dirname(ast.file), ast.variables[i].ref);
@@ -46,7 +46,7 @@ var compose = function (file, parent, callback) {
                         callback();
                     }
                 });
-            }
+            });
         });
 
         async.series(exec, function (err, variables) {
