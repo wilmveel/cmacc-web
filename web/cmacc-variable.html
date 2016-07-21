@@ -5,10 +5,11 @@
 
 <dom-module id="cmacc-variable">
     <style>
-        :host{
+        :host {
             cursor: pointer;
         }
-        paper-tooltip{
+
+        paper-tooltip {
             font-size: 24px;
         }
     </style>
@@ -31,24 +32,28 @@
         attached: function () {
             var parent = this.parentNode;
 
-            this.setColor = function(e, detail){
+            this.setColor = function (e, detail) {
 
-                if(detail === this.ref){
-                    console.log("ref", this.ref)
+                if (detail === this.ref) {
+                    //console.log("ref", this.ref)
                     this.style.backgroundColor = "yellow";
                 }
 
-                if(!detail){
+                if (!detail) {
                     this.style.backgroundColor = null;
                 }
-            },
+            };
 
-            this.addEventListener("mouseover", function(e){
-                this.fire('iron-signal', {name:'cmacc-variable', data: this.ref})
+            this.addEventListener("mouseover", function (e) {
+                this.fire('iron-signal', {name: 'cmacc-variable', data: this.ref})
             }, true);
 
-            this.addEventListener("mouseout", function(e){
-                this.fire('iron-signal', {name:'cmacc-variable', data: null})
+            this.addEventListener("mouseout", function (e) {
+                this.fire('iron-signal', {name: 'cmacc-variable', data: null})
+            }, true);
+
+            this.addEventListener("click", function (e) {
+                this.fire('cmacc-document', {name: 'ref', data: this.ref})
             }, true);
 
         }

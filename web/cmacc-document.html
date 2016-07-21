@@ -3,10 +3,25 @@
 
 <link rel="import" href="./cmacc-ast.html">
 
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
 <dom-module id="cmacc-document">
+    <style>
+        paper-dialog {
+            width: 400px;
+        }
+    </style>
     <template>
         <cmacc-ast file="{{file}}" on-refresh="refresh"></cmacc-ast>
         <div id="content"></div>
+
+        <paper-dialog id="dialog">
+            <h2>{{ref}}</h2>
+            <paper-input label="{{ref}}" value="{{val}}"></paper-input>
+            <paper-button on-tap="save">Save</paper-button>
+        </paper-dialog>
     </template>
 </dom-module>
 
@@ -19,13 +34,28 @@
             file: String
         },
 
-        refresh: function(){
-            var ast = this.querySelector('cmacc-ast').ast;
+        cmacc: null,
+        val:null,
 
-            window.cmacc.render(ast, function(err, markdown){
+        attached: function () {
+            this.cmacc = this.querySelector('cmacc-ast');
+            this.addEventListener('cmacc-document', function (e) {
+                this.$.dialog.open();
+                this.ref = e.detail.data;
+                var variable = this.cmacc.find(this.ref);
+                this.val = variable.val;
+            })
+        },
+
+        refresh: function () {
+            window.cmacc.render(this.cmacc.ast, function (err, markdown) {
                 this.$.content.innerHTML = window.cmacc.marked(markdown);
             }.bind(this))
+        },
 
+        save: function () {
+            this.cmacc.change(this.ref, this.val)
+            this.$.dialog.close();
         }
 
     });

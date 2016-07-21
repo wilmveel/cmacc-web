@@ -1,4 +1,5 @@
 var cmacc = {
+    helper: require('./helper'),
     parser: require('./parser'),
     compose: require('./compose'),
     render: require('./render'),
