@@ -20,8 +20,8 @@ var render = function (ast, parent, callback) {
 
                 var res = helper.queryAst(ast, key) || {};
 
-                if (res && res.ast) {
-                    return render(res.ast, ast, function (ast, text) {
+                if (res.variables) {
+                    return render(res, ast, function (ast, text) {
                         callback(null, text)
                     });
                 }

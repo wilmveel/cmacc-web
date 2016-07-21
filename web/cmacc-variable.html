@@ -13,7 +13,7 @@
         }
     </style>
     <template>
-        <iron-signals on-iron-signal-variable="setColor"></iron-signals>
+        <iron-signals on-iron-signal-cmacc-variable="setColor"></iron-signals>
         <paper-tooltip>{{ref}}</paper-tooltip>
         <content></content>
     </template>
@@ -44,11 +44,11 @@
             },
 
             this.addEventListener("mouseover", function(e){
-                this.fire('iron-signal', {name:'variable', data: this.ref})
+                this.fire('iron-signal', {name:'cmacc-variable', data: this.ref})
             }, true);
 
             this.addEventListener("mouseout", function(e){
-                this.fire('iron-signal', {name:'variable', data: null})
+                this.fire('iron-signal', {name:'cmacc-variable', data: null})
             }, true);
 
         }

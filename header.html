@@ -8,6 +8,20 @@
     <!-- Imports polyfill -->
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
+    <script>
+        window.notexist = function () {
+
+        };
+    </script>
+
+    <!-- common accord -->
+    <script src="/assets/bundle.js"></script>
+
+
+    <script>
+        console.log(window.cmacc);
+    </script>
+
     <!-- Imports custom element -->
     <link rel="import" href="./web/cmacc-variable.html">
     <link rel="import" href="./web/cmacc-section.html">
@@ -15,13 +29,10 @@
 
     <style>
 
-    </style>
-
-    <style>
-
         cmacc-variable {
-            color:green;
+            color: green;
         }
+
         .container {
             width: 800px;
             margin: 0 auto;
@@ -31,3 +42,5 @@
 
 </head>
 <body>
+    <cmacc-document file="http://localhost:3000/doc/acme/angel-round/SAFE_Robinson.md"></cmacc-document>
+</body>

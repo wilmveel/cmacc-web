@@ -51,7 +51,7 @@ $ sign_investor = [../sec/sign/investor.md] => {
     "def" : def
 }
 
-$ miscellaneous = [../sec/miscellaneous.md]
+$ miscellaneous = [../sec/miscellaneous.md] => {"def" : def}
 
 {{intro}}
 

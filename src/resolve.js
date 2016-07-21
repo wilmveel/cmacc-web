@@ -9,6 +9,11 @@ var resolve = function (variable, ast, callback) {
     if(variable.type)
         return callback(null, variable);
 
+    if(ast.loc)
+        variable.loc = ast.loc + "." + variable.key
+    else
+        variable.loc = variable.key
+
     if (!variable.val) {
         variable.val = null;
         variable.type = 'null';
@@ -23,33 +28,35 @@ var resolve = function (variable, ast, callback) {
 
     variable.val.replace(regex.REGEX_KEYVALUE, function (found, key, val) {
 
-        variable.ast = variable.ast || {};
-        variable.ast.variables = variable.ast.variables || [];
+        variable = variable || {};
+        variable.variables = variable.variables || [];
 
         var key = key.match(regex.REGEX_STRING)[1];
 
         if (val === "null") {
-            variable.ast.variables.push({
+            variable.variables.push({
                 type:'null',
                 key: key,
-                val: null
+                val: null,
+                loc: ast.loc + "." + key
             });
             return found;
         }
 
         if (val.match(regex.REGEX_STRING)) {
             var val = val.match(regex.REGEX_STRING)[1];
-            variable.ast.variables.push({
+            variable.variables.push({
                 type:'string',
                 key: key,
-                val: val
+                val: val,
+                loc: variable.loc + "." + key
             });
             return found;
         }
 
         var res = helper.queryAst(ast, val);
         res.type = 'ref';
-        variable.ast.variables.push(res);
+        variable.variables.push(res);
 
 
         return found;

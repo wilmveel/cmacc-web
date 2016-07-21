@@ -1,4 +1,4 @@
-var fs = require('fs');
+var imp = require('./import');
 
 var regex = require('./regex');
 
@@ -10,7 +10,7 @@ var parser = function (file, callback) {
         text: undefined
     };
 
-    fs.readFile(file, 'utf8', function (err, text) {
+    imp.readFile(file, function (err, text) {
 
         if (err) return callback(err)
 

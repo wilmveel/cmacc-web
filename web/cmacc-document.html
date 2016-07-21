@@ -1,9 +1,13 @@
 <!-- Imports polymer -->
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
+<link rel="import" href="./cmacc-ast.html">
+
 <dom-module id="cmacc-document">
-
-
+    <template>
+        <cmacc-ast file="{{file}}" on-refresh="refresh"></cmacc-ast>
+        <div id="content"></div>
+    </template>
 </dom-module>
 
 
@@ -15,22 +19,13 @@
             file: String
         },
 
-        attached: function () {
-            var parent = this.parentNode;
+        refresh: function(){
+            var ast = this.querySelector('cmacc-ast').ast;
 
-           //console.log(parent, parent.parentNode.tagName)
+            window.cmacc.render(ast, function(err, markdown){
+                this.$.content.innerHTML = window.cmacc.marked(markdown);
+            }.bind(this))
 
-            this.addEventListener("mouseover", function(e){
-                this.style.backgroundColor = "#CAE1FF";
-            }, true);
-
-            this.addEventListener("mouseout", function(e){
-                this.style.backgroundColor = null;
-            }, true);
-
-            this.addEventListener("click", function(e){
-                console.log(this.file);
-            }.bind(this), true)
         }
 
     });

@@ -14,14 +14,11 @@ var file = path.join(__dirname, input);
 
 cmacc.compose(file, null, function (err, ast) {
 
-    fs.writeFileSync('index.json', JSON.stringify(ast, null, 4))
+    fs.writeFileSync('run.json', JSON.stringify(ast, null, 4))
 
     cmacc.render(ast, function (err, text) {
         console.log(text)
-
-        fs.writeFileSync('index.md', text)
-
-        var header = fs.readFileSync('header.html');
-        fs.writeFileSync('index.html', header + marked(text))
+        fs.writeFileSync('run.md', text)
+        fs.writeFileSync('run.html', marked(text))
     });
 });

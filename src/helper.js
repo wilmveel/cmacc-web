@@ -19,8 +19,8 @@ var helper = {
                     if(current.variables[k]){
                         res = current.variables[k];
                     }
-                    if(current.variables[k].ast){
-                        current = current.variables[k].ast;
+                    if(current.variables[k]){
+                        current = current.variables[k];
                     }
                 }
             })

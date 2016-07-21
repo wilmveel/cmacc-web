@@ -3,8 +3,10 @@
 
 <!-- Defines element markup -->
 <dom-module id="cmacc-section">
-
-
+    <template>
+        <iron-signals on-iron-signal-cmacc-section="setColor"></iron-signals>
+        <content></content>
+    </template>
 </dom-module>
 
 
@@ -17,16 +19,25 @@
         },
 
         attached: function () {
-            var parent = this.parentNode;
 
-           //console.log(parent, parent.parentNode.tagName)
+            this.setColor = function(e, detail){
+
+                if(detail === this.file){
+                    this.style.backgroundColor = "lightblue";
+                }
+
+                if(!detail){
+                    this.style.backgroundColor = null;
+                }
+            },
 
             this.addEventListener("mouseover", function(e){
-                this.style.backgroundColor = "#CAE1FF";
-            }, true);
+                this.fire('iron-signal', {name:'cmacc-section', data: this.file})
+                e.stopPropagation();
+            }, false);
 
             this.addEventListener("mouseout", function(e){
-                this.style.backgroundColor = null;
+                this.fire('iron-signal', {name:'cmacc-section', data: null})
             }, true);
 
             this.addEventListener("click", function(e){
