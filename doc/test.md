@@ -4,13 +4,12 @@ $ test2 = {
     "test" : "lo"
 }
 
-$ test3 = [./object.md]
+$ test3 = [./Object.md]
 
-$ test4 = [./object.md] => {
-    "obj": {
+
+$ test4 = [./Object.md] => {
         "hel" : hel,
-        "lo" : lo.test
-    }
+        "lo" : lo
 }
 
 {{test1}} World
@@ -18,3 +17,5 @@ $ test4 = [./object.md] => {
 Hel{{test2.test}} World
 
 {{test3}}
+
+{{test4}}
