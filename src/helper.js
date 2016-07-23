@@ -17,11 +17,15 @@ var helper = {
             if(current.variables) {
                 current.variables.forEach(function (v, k) {
                     if (v.key === key) {
-                        if (current.variables[k]) {
-                            res = current.variables[k];
-                        }
-                        if (current.variables[k]) {
-                            current = current.variables[k];
+                        if (current.variables && current.variables[k]) {
+                            if(current.variables[k].link){
+                                res = current.variables[k].link;
+                                current = current.variables[k].link;
+                            }else{
+                                res = current.variables[k];
+                                current = current.variables[k];
+                            }
+
                         }
                     }
                 });

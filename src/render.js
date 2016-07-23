@@ -7,67 +7,67 @@ var helper = require('./helper');
 var render = function (ast, callback, editor) {
 
     var exec = {};
-    if (ast.text) {
-
-        ast.text.replace(regex.REGEX_INJECT, function (found, enter, prefix, key) {
-
-            exec[key] = function (callback) {
-
-                var res = helper.queryAst(ast, key) || {};
-
-                if (res.variables) {
-                    return render(res, function (ast, text) {
-                        callback(null, text)
-                    });
-                }
-
-                var text = null;
-
-                if (editor)
-                    text = "<cmacc-variable ref='" + res.loc + "'>" + (res.val || "!!" + key + "!!") + "</cmacc-variable>";
-                else
-                    text = res.val || found;
-
-                callback(null, text);
-
-            };
-            return found;
-
-        });
-
-        async.series(exec, function (err, res) {
 
 
-            var text = ast.text.replace(regex.REGEX_INJECT, function (found, enter, prefix, key) {
-                var inject = res[key];
+    ast.text.replace(regex.REGEX_INJECT, function (found, enter, prefix, key) {
 
-                if (prefix)
-                    inject = inject.replace(/^/gm, prefix);
+        exec[key] = function (callback) {
 
-                return enter + inject;
-            });
+            var res = helper.queryAst(ast, key) || {};
 
-            if (editor) {
-                text = text.replace(/^(.*)$/gm, function (found) {
-
-                    return found.replace(/^(\s*)((?:\>\s)|(?:\d\.\s))?(.*)$/, function (r, space, pre, cont) {
-                        if (cont)
-                            return (space || '') +
-                                (pre || '') +
-                                "<cmacc-section file='" +
-                                ast.file +
-                                "'>" + cont.trim() +
-                                "</cmacc-section>" +
-                                (cont.match(/(\ \ )?$/)[1] ? '  ' : '');
-                        else
-                            return ''
-                    });
+            if (res.text) {
+                return render(res, function (ast, text) {
+                    callback(null, text)
                 });
             }
 
-            callback(null, text)
+            var text = null;
+
+            if (editor)
+                text = "<cmacc-variable ref='" + res.loc + "'>" + (res.val || "!!" + key + "!!") + "</cmacc-variable>";
+            else
+                text = res.val || found;
+
+            callback(null, text);
+
+        };
+        return found;
+
+    });
+
+    async.series(exec, function (err, res) {
+
+
+        var text = ast.text.replace(regex.REGEX_INJECT, function (found, enter, prefix, key) {
+            var inject = res[key];
+
+            if (prefix)
+                inject = inject.replace(/^/gm, prefix);
+
+            return enter + inject;
         });
-    }
+
+        if (editor) {
+            text = text.replace(/^(.*)$/gm, function (found) {
+
+                return found.replace(/^(\s*)((?:\>\s)|(?:\d\.\s))?(.*)$/, function (r, space, pre, cont) {
+                    if (cont)
+                        return (space || '') +
+                            (pre || '') +
+                            "<cmacc-section file='" +
+                            ast.file +
+                            "'>" + cont.trim() +
+                            "</cmacc-section>" +
+                            (cont.match(/(\ \ )?$/)[1] ? '  ' : '');
+                    else
+                        return ''
+                });
+            });
+        }
+
+        callback(null, text)
+    });
+
 
 };
 
