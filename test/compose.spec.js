@@ -128,7 +128,7 @@ describe('compose', function () {
                 render(ast, function (err, markdown) {
                     console.log(markdown)
                     done();
-                });
+                }, true);
             });
         });
     });

@@ -18,7 +18,7 @@ var render = function (ast, callback, editor) {
             if (res.text) {
                 return render(res, function (ast, text) {
                     callback(null, text)
-                });
+                }, editor);
             }
 
             var text = null;
