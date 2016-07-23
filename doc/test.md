@@ -1,16 +1,20 @@
-$ test1 = "Hello"
+$ test1 = "ld"
 
 $ test2 = {
-    "test" : "lo"
+    "test" : "Wor"
 }
 
-$ test3 = [./object.md]
+$ test3 = [./Object.md]
 
-$ test4 = [./object.md] => {
-    "obj": {
-        "hel" : hel,
-        "lo" : lo.test
-    }
+$ obj = {
+    "hel" : test1,
+    "lo" : test2.test
 }
 
-{{text}}
+$ test4 = [./Object.md] => {
+    "obj": obj
+}
+
+{{test3}}
+
+{{test4}}
