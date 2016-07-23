@@ -54,10 +54,16 @@ var resolve = function (variable, ast, callback) {
             return found;
         }
 
-        var res = helper.queryAst(ast, val);
-        res.type = 'ref';
-        variable.variables.push(res);
 
+
+        var res = helper.queryAst(ast, val);
+        variable.variables.push({
+            type:'ref',
+            key: key,
+            val: val,
+            loc: variable.loc + "." + key,
+            link: res
+        });
 
         return found;
 

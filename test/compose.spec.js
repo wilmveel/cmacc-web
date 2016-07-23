@@ -121,7 +121,7 @@ describe('compose', function () {
     });
 
     describe('http SAFE_Robinson.md', function () {
-        it('should parse variable hello World', function (done) {
+        xit('should parse variable hello World', function (done) {
             var file = 'http://localhost:3000/doc/acme/angel-round/SAFE_Robinson.md';
             compose(file, null, function (err, ast) {
 
