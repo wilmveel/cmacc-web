@@ -31,7 +31,6 @@
             this.setColor = function (e, detail) {
 
                 if (detail === this.ref) {
-                    //console.log("ref", this.ref)
                     this.style.backgroundColor = "yellow";
                 }
 
@@ -49,7 +48,7 @@
             }, true);
 
             this.addEventListener("click", function (e) {
-                this.fire('cmacc-document', {name: 'ref', data: this.ref})
+                this.fire('cmacc-variable', {name: 'ref', data: this.ref})
             }, true);
 
         }

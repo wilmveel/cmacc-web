@@ -13,7 +13,10 @@
         is: 'cmacc-ast',
 
         properties: {
-            file: String,
+            file: {
+                type: String,
+                observer: 'compose'
+            },
             ast: {
                 type: Object,
                 notify: true
@@ -21,23 +24,24 @@
         },
 
         attached: function () {
+
+        },
+
+        compose: function(){
             window.cmacc.compose(this.file, null, function (err, ast) {
                 console.log(ast)
                 this.ast = ast;
-                this.fire('refresh', this.ast);
             }.bind(this))
         },
 
         find: function (key) {
-            var ast = window.cmacc.helper.queryAst(this.ast, key);
-            return ast;
+            return window.cmacc.helper.queryAst(this.ast, key);
         },
 
         change: function (key, value) {
             var ast = window.cmacc.helper.queryAst(this.ast, key);
             ast.val = value;
-            this.notifyObserver('ast')
-            this.fire('refresh', this.ast);
+            this.notifyPath('ast', this.ast);
         }
 
     });

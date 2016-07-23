@@ -8,18 +8,45 @@
 <link rel="import" href="./cmacc-ast.html">
 <link rel="import" href="./cmacc-document.html">
 <link rel="import" href="./cmacc-sidebar.html">
+<link rel="import" href="./cmacc-dialog.html">
 
 <dom-module id="cmacc-app">
-    <template>
-        <cmacc-ast file="/doc/marc/HelloWorldOverwrite.md" ast="{{ast}}"></cmacc-ast>
-        <app-drawer-layout>
 
-            <div>
-                <cmacc-document ast="{{ast}}"></cmacc-document>
+    <style>
+        #container {
+            background-color: #dddddd;
+            height: 100%;
+            padding: 50px;
+            overflow: scroll;
+        }
+
+        #page {
+            width: 80%;
+            min-height: 80%;
+            margin: auto;
+            padding: 20px;
+            background: #FFF;
+            box-shadow: 10px 10px 5px #888888;
+        }
+
+    </style>
+
+    <template>
+        <cmacc-ast id="ast" ast="{{ast}}"></cmacc-ast>
+        <cmacc-dialog id="dialog" ast="{{ast}}"></cmacc-dialog>
+        <app-drawer-layout fullbleed>
+
+            <div id="container">
+                <div id="page">
+                    <cmacc-document ast="{{ast}}"></cmacc-document>
+                </div>
+
             </div>
-            <app-drawer>
+
+            <app-drawer align="right">
                 <cmacc-sidebar ast="{{ast}}"></cmacc-sidebar>
             </app-drawer>
+
         </app-drawer-layout>
     </template>
 </dom-module>
@@ -31,11 +58,39 @@
 
         properties: {
             ast: {
-                type: Object
+                type: Object,
+                observer: 'refresh'
             }
         },
-        ready: function () {
 
+        ready: function () {
+            this.addEventListener("cmacc-variable", function (e) {
+                var ref = e.detail.data;
+                console.log(e.detail.data);
+                this.$.dialog.open(ref)
+            }.bind(this), true);
+
+            this.addEventListener("ast-changed", function (e) {
+                console.log(e.detail.data);
+            }.bind(this), true);
+
+        },
+        attached: function () {
+            console.log(this.getDoc());
+            this.$.ast.file = this.getDoc()
+        },
+        refresh: function () {
+            console.log('refresh');
+        },
+        getDoc: function () {
+            var url = window.location.href;
+            var name = 'doc';
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
     });
 </script>

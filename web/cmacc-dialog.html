@@ -11,47 +11,48 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 
-<dom-module id="cmacc-document">
+<dom-module id="cmacc-dialog">
     <style>
         paper-dialog {
             width: 800px;
         }
     </style>
     <template>
-        <div id="content"></div>
+        <paper-dialog id="dialog">
+            <h2>{{ref}}</h2>
+            <paper-input label="{{ref}}" value="{{val}}"></paper-input>
+            <paper-button on-tap="save">Save</paper-button>
+        </paper-dialog>
     </template>
 </dom-module>
 
 
 <script>
-
     Polymer({
-        is: 'cmacc-document',
+        is: 'cmacc-dialog',
 
         properties: {
-            file: String,
             ast: {
                 type: Object,
                 observer: 'refresh'
-            }
+            },
+            variable: Object,
+            val: String
         },
 
-        attached: function () {
-            this.addEventListener('ast-changed', function (e) {
-                console.log('changedchangedchangedchangedchanged');
-                this.refresh()
-            }.bind(this))
+        open: function(ref){
+            this.variable = ast.find(ref);
+            this.val = this.variable.val;
+            this.$.dialog.open();
         },
 
-        refresh: function () {
-            console.log('lalalal', this.ast);
-            window.cmacc.render(this.ast, function (err, markdown) {
-                this.$.content.innerHTML = window.cmacc.marked(markdown);
-            }.bind(this), true)
+        save: function(){
+            console.log(this.variable.loc, this.val);
+            ast.change(this.variable.loc, this.val);
+            this.$.dialog.close();
         },
 
-        save: function () {
-            this.cmacc.change(this.ref, this.val)
+        close: function(){
             this.$.dialog.close();
         }
 
