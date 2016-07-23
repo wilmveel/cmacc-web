@@ -15,8 +15,6 @@ $ test4 = [./Object.md] => {
     "obj": obj
 }
 
-
-
 {{test3}}
 
 {{test4}}
