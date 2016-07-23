@@ -5,8 +5,8 @@ $ def = [../../com/ycombinator/safe/sec/defined_terms.md] => {
 }
 
 $ robinson = [./SAFE_Robinson.md] => {
-    "valuationCap" : valuationCap,
-    "def" : def
-}
+     "valuationCap" : valuationCap,
+     "def" : def
+ }
 
 {{robinson}}

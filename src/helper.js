@@ -13,17 +13,19 @@ var helper = {
 
         var keys = key.split('.');
         for (var i in keys) {
-            var key = keys[i]
-            current.variables.forEach(function(v, k){
-                if(v.key === key){
-                    if(current.variables[k]){
-                        res = current.variables[k];
+            var key = keys[i];
+            if(current.variables) {
+                current.variables.forEach(function (v, k) {
+                    if (v.key === key) {
+                        if (current.variables[k]) {
+                            res = current.variables[k];
+                        }
+                        if (current.variables[k]) {
+                            current = current.variables[k];
+                        }
                     }
-                    if(current.variables[k]){
-                        current = current.variables[k];
-                    }
-                }
-            })
+                });
+            }
         }
 
         return res;

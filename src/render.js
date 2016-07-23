@@ -4,12 +4,7 @@ var async = require('async');
 var regex = require('./regex');
 var helper = require('./helper');
 
-var render = function (ast, parent, callback) {
-
-    if (callback == null){
-        callback = parent;
-        parent = null;
-    }
+var render = function (ast, callback, editor) {
 
     var exec = {};
     if (ast.text) {
@@ -21,12 +16,18 @@ var render = function (ast, parent, callback) {
                 var res = helper.queryAst(ast, key) || {};
 
                 if (res.variables) {
-                    return render(res, ast, function (ast, text) {
+                    return render(res, function (ast, text) {
                         callback(null, text)
                     });
                 }
 
-                var text = "<cmacc-variable ref='" + res.loc + "'>" + (res.val || "!!" + key + "!!") + "</cmacc-variable>"
+                var text = null;
+
+                if (editor)
+                    text = "<cmacc-variable ref='" + res.loc + "'>" + (res.val || "!!" + key + "!!") + "</cmacc-variable>";
+                else
+                    text = res.val || found;
+
                 callback(null, text);
 
             };
@@ -46,21 +47,23 @@ var render = function (ast, parent, callback) {
                 return enter + inject;
             });
 
-            text = text.replace(/^(.*)$/gm, function (found) {
+            if (editor) {
+                text = text.replace(/^(.*)$/gm, function (found) {
 
-                return found.replace(/^(\s*)((?:\>\s)|(?:\d\.\s))?(.*)$/, function (r, space, pre, cont) {
-                    if (cont)
-                        return (space || '') +
-                            (pre || '') +
-                            "<cmacc-section file='" +
-                            ast.file +
-                            "'>" + cont.trim() +
-                            "</cmacc-section>" +
-                            (cont.match(/(\ \ )?$/)[1] ? '  ' : '');
-                    else
-                        return ''
+                    return found.replace(/^(\s*)((?:\>\s)|(?:\d\.\s))?(.*)$/, function (r, space, pre, cont) {
+                        if (cont)
+                            return (space || '') +
+                                (pre || '') +
+                                "<cmacc-section file='" +
+                                ast.file +
+                                "'>" + cont.trim() +
+                                "</cmacc-section>" +
+                                (cont.match(/(\ \ )?$/)[1] ? '  ' : '');
+                        else
+                            return ''
+                    });
                 });
-            });
+            }
 
             callback(null, text)
         });
