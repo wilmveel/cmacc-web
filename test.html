@@ -3,7 +3,7 @@
 <head>
 
     <meta charset="utf-8">
-    <title>&lt;hello-world&gt;</title>
+    <title>&lt;Demo&gt;</title>
 
     <!-- Imports polyfill -->
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
@@ -23,7 +23,9 @@
     </script>
 
     <!-- Imports custom element -->
-    <link rel="import" href="./web/cmacc-app.html">
+    <link rel="import" href="./web/cmacc-variable.html">
+    <link rel="import" href="./web/cmacc-section.html">
+    <link rel="import" href="./web/cmacc-document.html">
 
     <style>
 
@@ -42,6 +44,9 @@
 
 <body>
 
-<cmacc-app file="/doc/test.md"></cmacc-app>
+<div class="container">
+    <cmacc-document file="/doc/test.md"></cmacc-document>
+</div>
+
 
 </body>
