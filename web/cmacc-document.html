@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <link rel="import" href="./cmacc-ast.html">
+<link rel="import" href="./cmacc-sidebar.html">
 
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
@@ -14,7 +15,8 @@
         }
     </style>
     <template>
-        <cmacc-ast file="{{file}}" on-refresh="refresh"></cmacc-ast>
+
+
         <div id="content"></div>
 
         <paper-dialog id="dialog">
@@ -31,7 +33,11 @@
         is: 'cmacc-document',
 
         properties: {
-            file: String
+            file: String,
+            ast:{
+                type:Object,
+                observer: 'refresh'
+            }
         },
 
         cmacc: null,
@@ -48,9 +54,9 @@
         },
 
         refresh: function () {
-            window.cmacc.render(this.cmacc.ast, function (err, markdown) {
+            window.cmacc.render(this.ast, function (err, markdown) {
                 this.$.content.innerHTML = window.cmacc.marked(markdown);
-            }.bind(this))
+            }.bind(this), true)
         },
 
         save: function () {

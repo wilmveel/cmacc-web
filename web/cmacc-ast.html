@@ -14,11 +14,15 @@
 
         properties: {
             file: String,
-            refresh: Function
+            ast: {
+                type: Object,
+                notify: true
+            }
         },
 
         attached: function () {
             window.cmacc.compose(this.file, null, function (err, ast) {
+                console.log(ast)
                 this.ast = ast;
                 this.fire('refresh', this.ast);
             }.bind(this))
@@ -32,6 +36,7 @@
         change: function (key, value) {
             var ast = window.cmacc.helper.queryAst(this.ast, key);
             ast.val = value;
+            this.notifyObserver('ast')
             this.fire('refresh', this.ast);
         }
 

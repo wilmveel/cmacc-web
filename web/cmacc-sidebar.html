@@ -1,0 +1,35 @@
+<!-- Imports polymer -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-signals/iron-signals.html">
+
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<dom-module id="cmacc-sidebar">
+    <template>
+        <div>
+            <template is="dom-repeat" items="{{list(ast)}}" >
+                <paper-item>{{item.key}} : {{item.val}}</paper-item>
+            </template>
+        </div>
+    </template>
+</dom-module>
+
+
+<script>
+    Polymer({
+        is: 'cmacc-sidebar',
+
+        properties: {
+            ast: Object
+        },
+        attached: function () {
+
+        },
+
+        list: function(ast){
+            return ast.variables
+        }
+
+    });
+</script>
