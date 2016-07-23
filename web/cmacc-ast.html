@@ -41,7 +41,7 @@
         change: function (key, value) {
             var ast = window.cmacc.helper.queryAst(this.ast, key);
             ast.val = value;
-            this.fire('iron-signal', {name: 'cmacc-ast', data: ast});
+            this.fire('iron-signal', {name: 'cmacc-ast', data: this.ast});
         }
 
     });

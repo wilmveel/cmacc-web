@@ -5,6 +5,8 @@
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
 <link rel="import" href="./cmacc-ast.html">
 <link rel="import" href="./cmacc-document.html">
 <link rel="import" href="./cmacc-sidebar.html">
@@ -36,12 +38,20 @@
         <cmacc-dialog id="dialog" ast="{{ast}}"></cmacc-dialog>
         <app-drawer-layout fullbleed>
 
+
+
             <div id="container">
                 <div id="page">
                     <cmacc-document ast="{{ast}}"></cmacc-document>
                 </div>
 
             </div>
+
+            <app-drawer align="left">
+                <template id="rep" is="dom-repeat" items="{{files}}">
+                    <paper-item>{{item}}</paper-item>
+                </template>
+            </app-drawer>
 
             <app-drawer align="right">
                 <cmacc-sidebar ast="{{ast}}"></cmacc-sidebar>
@@ -62,6 +72,14 @@
                 observer: 'refresh'
             }
         },
+
+        files: [
+            '/doc/marc/HelloWorld.md',
+            '/doc/marc/HelloWorldOverwrite.md',
+            '/doc/acme/angel-round/SAFE_Robinson.md',
+            '/doc/acme/angel-round/SAFE_Robinson_v2.md',
+            '/doc/acme/angel-round/safe_robinson_v3.md'
+        ],
 
         ready: function () {
             this.addEventListener("cmacc-variable", function (e) {
