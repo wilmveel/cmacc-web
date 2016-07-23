@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <title>&lt;Demo&gt;</title>
+
+    <!-- Imports polyfill -->
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <script>
+        window.notexist = function () {
+
+        };
+    </script>
+
+    <!-- common accord -->
+    <script src="/assets/bundle.js"></script>
+
+
+    <script>
+        console.log(window.cmacc);
+    </script>
+
+    <!-- Imports custom element -->
+    <link rel="import" href="./web/cmacc-variable.html">
+    <link rel="import" href="./web/cmacc-section.html">
+    <link rel="import" href="./web/cmacc-document.html">
+
+    <style>
+
+        cmacc-variable {
+            color: green;
+        }
+
+        .container {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <cmacc-document file="/doc/MarcDangeard.md"></cmacc-document>
+</div>
+
+
+</body>

@@ -13,4 +13,8 @@ $ test4 = [./object.md] => {
     }
 }
 
-{{text}}
+{{test1}} World
+
+Hel{{test2.test}} World
+
+{{test3}}
