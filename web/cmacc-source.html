@@ -1,0 +1,47 @@
+<!-- Imports polymer -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="./cmacc-ast.html">
+<link rel="import" href="./cmacc-sidebar.html">
+
+<link rel="import" href="./cmacc-variable.html">
+<link rel="import" href="./cmacc-section.html">
+
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="cmacc-source">
+    <template>
+        <iron-signals on-iron-signal-cmacc-ast="refresh"></iron-signals>
+        <pre id="source">test</pre>
+    </template>
+</dom-module>
+
+
+<script>
+
+    Polymer({
+        is: 'cmacc-source',
+
+        properties: {
+            ast: {
+                type: Object,
+                observer: 'refresh'
+            }
+        },
+
+        attached: function () {
+            this.addEventListener('ast-changed', function (e) {
+
+                this.refresh()
+            }.bind(this))
+        },
+
+        refresh: function () {
+            console.log('ast.src', this.ast);
+            this.$.source.innerHTML = this.ast.src;
+        }
+
+    });
+</script>

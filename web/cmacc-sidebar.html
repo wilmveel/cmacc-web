@@ -10,10 +10,10 @@
         <iron-signals on-iron-signal-cmacc-ast="refresh"></iron-signals>
         <div>
             <template id="rep" is="dom-repeat" items="{{list(ast)}}" observer="{{ast}}">
-                <paper-item on-mouseover='overSection' on-mouseout='outSection' on-tap="clickSection" ><strong>$ {{item.key}} </strong> - [{{item.ref}}]</paper-item>
-                <template   is="dom-repeat" items="{{list(item)}}">
+                <paper-item on-mouseover='overSection' on-mouseout='outSection' on-tap="clickSection" >{{item.key}} </paper-item>
+                <!--template   is="dom-repeat" items="{{list(item)}}">
                     <paper-item on-mouseover='overVariable' on-mouseout='outVariable' on-tap="clickVariable">{{item.key}} : {{item.val}}</paper-item>
-                </template>
+                </template-->
             </template>
         </div>
     </template>

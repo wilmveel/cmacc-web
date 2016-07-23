@@ -7,12 +7,15 @@ var parser = function (file, callback) {
     var ast = {
         file: file,
         variables: [],
-        text: undefined
+        text: undefined,
+        src: undefined
     };
 
     imp.readFile(file, function (err, text) {
 
         if (err) return callback(err)
+
+        ast.src = text;
 
         text = text.replace(regex.REGEX_VARIABLE, function (found, key, ref, val) {
             ast.variables.push({

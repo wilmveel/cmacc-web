@@ -1,3 +1,4 @@
+var url = require('url');
 var path = require('path');
 var async = require('async');
 
@@ -29,19 +30,18 @@ var compose = function (file, parent, callback) {
 
         if(parent) {
             parent.file = ast.file;
+            parent.src = ast.src;
             parent.text = ast.text;
             parent.variables = variables;
             ast = parent;
         }
 
-
         var exec = [];
         ast.variables.forEach(function (item, i) {
             exec.push(function (callback) {
                 resolve(ast.variables[i], ast, function (err, data) {
-                    if (ast.variables[i].ref && ast.variables[i].type !== 'ref') {
-                        var match =  ast.file.match(/^(\w*:\/)?(.*)$/);
-                        var location = (match[1] || '') + path.resolve(path.dirname(match[2]), ast.variables[i].ref);
+                    if (ast.variables[i].ref && !ast.variables[i].src) {
+                        var location = url.resolve(ast.file, ast.variables[i].ref)
                         compose(location, ast.variables[i], function (err, res) {
                             callback();
                         });
