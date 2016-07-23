@@ -2,23 +2,40 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 
-<dom-module id="cmacc-ast">
-    <app-drawer-layout>
-        <app-drawer>
-            drawer content
-        </app-drawer>
-        <div>
-            <cmacc-document file="/doc/acme/angel-round/SAFE_Robinson.md"></cmacc-document>
-        </div>
-    </app-drawer-layout>
+<link rel="import" href="./cmacc-ast.html">
+<link rel="import" href="./cmacc-document.html">
+<link rel="import" href="./cmacc-sidebar.html">
+
+<dom-module id="cmacc-app">
+    <template>
+        <cmacc-ast file="/doc/marc/HelloWorld.md" ast="{{ast}}"></cmacc-ast>
+        <app-drawer-layout>
+
+            <div>
+                <cmacc-document ast="{{ast}}"></cmacc-document>
+            </div>
+            <app-drawer>
+                <cmacc-sidebar ast="{{ast}}"></cmacc-sidebar>
+            </app-drawer>
+        </app-drawer-layout>
+    </template>
 </dom-module>
 
 
 <script>
     Polymer({
-        is: 'cmacc-app'
+        is: 'cmacc-app',
+
+        properties: {
+            ast: {
+                type: Object
+            }
+        },
+        ready: function () {
+            alert('123');
+        }
     });
 </script>
