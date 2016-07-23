@@ -8,10 +8,10 @@
 <dom-module id="cmacc-sidebar">
     <template>
         <div>
-            <template is="dom-repeat" items="{{list(ast)}}" >
-                <paper-item><strong>$ {{item.key}}</strong></paper-item>
-                <template is="dom-repeat" items="{{list(item)}}" >
-                    <paper-item>{{item.key}} : {{item.val}}</paper-item>
+            <template is="dom-repeat" items="{{list(ast)}}">
+                <paper-item><strong>$ {{item.key}} </strong> - [{{item.ref}}]</paper-item>
+                <template is="dom-repeat" items="{{list(item)}}">
+                    <paper-item on-mouseover='over' on-mouseout='out' on-tap="click">{{item.key}} : {{item.val}}</paper-item>
                 </template>
             </template>
         </div>
@@ -30,8 +30,22 @@
 
         },
 
-        list: function(ast){
+        list: function (ast) {
             return ast.variables
+        },
+
+        over: function (e) {
+            var item = e.model.item;
+            this.fire('iron-signal', {name: 'cmacc-variable', data: item.loc})
+        },
+
+        out: function () {
+            this.fire('iron-signal', {name: 'cmacc-variable', data: null})
+        },
+
+        click: function (e) {
+            var item = e.model.item;
+            this.fire('cmacc-variable', {name: 'ref', data: item.loc})
         }
 
     });

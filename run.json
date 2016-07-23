@@ -1,0 +1,27 @@
+{
+    "file": "/Users/willemveelenturf/projects/commonaccord/doc/marc/HelloWorldOverwrite.md",
+    "variables": [
+        {
+            "key": "person",
+            "ref": "./MarcDangeard.md",
+            "val": "{\n    \"name\" : \"Willem\",\n    \"city\" : \"Utrecht\"\n}\n    ",
+            "loc": "person",
+            "variables": [
+                {
+                    "type": "string",
+                    "key": "name",
+                    "val": "Willem",
+                    "loc": "person.name"
+                },
+                {
+                    "type": "string",
+                    "key": "city",
+                    "val": "Utrecht",
+                    "loc": "person.city"
+                }
+            ],
+            "file": "/Users/willemveelenturf/projects/commonaccord/doc/marc/MarcDangeard.md"
+        }
+    ],
+    "text": "My name is {{person.name}} and I live in {{person.city}}"
+}
