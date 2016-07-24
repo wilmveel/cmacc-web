@@ -9,7 +9,7 @@ var imp = {
 
         var parse = url.parse(file);
 
-        if(XMLHttpRequest){
+        if(typeof window != 'undefined' && window.document){
 
             var call = '';
             if(parse.protocol === "ipfs:")
