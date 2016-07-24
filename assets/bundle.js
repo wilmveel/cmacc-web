@@ -209,13 +209,14 @@ var cmacc =
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(5);
+	/* WEBPACK VAR INJECTION */(function(__dirname) {var fs = __webpack_require__(5);
 	var request = __webpack_require__(6);
 
 	var imp = {
 
 	    readFile : function(file, callback){
 	        console.log(file)
+	        file = `file://${__dirname}/` +file
 	        if(/^http\:\/\//.test(file)){
 	            request(file, function (error, response, body) {
 	                if (!error && response.statusCode == 200) {
@@ -232,6 +233,7 @@ var cmacc =
 	};
 
 	module.exports = imp;
+	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ },
 /* 5 */
