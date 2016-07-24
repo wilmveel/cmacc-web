@@ -9,6 +9,7 @@ describe('compose', function () {
 
     var compose = require('../src/compose');
     var render = require('../src/render');
+    var serialize = require('../src/serialize');
 
     describe('Variable.md', function () {
         it('should parse variable hello World', function (done) {
@@ -127,8 +128,17 @@ describe('compose', function () {
 
                 render(ast, function (err, markdown) {
                     console.log(markdown)
+<<<<<<< Updated upstream
                     done();
                 });
+=======
+                    serialize(ast, function (err, source) {
+                        console.log(source)
+                        done();
+                    }, true);
+
+                }, true);
+>>>>>>> Stashed changes
             });
         });
     });

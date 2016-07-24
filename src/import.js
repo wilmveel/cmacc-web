@@ -1,11 +1,12 @@
 var fs = require("fs");
+var url = require("fs");
 var request = require("request");
 
 var imp = {
 
     readFile : function(file, callback){
 
-        if(!fs.readFile){
+        if(window.document){
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {

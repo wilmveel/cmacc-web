@@ -3,6 +3,7 @@ var cmacc = {
     parser: require('./parser'),
     compose: require('./compose'),
     render: require('./render'),
+    serialize: require('./serialize'),
     marked: require('marked')
 };
 
