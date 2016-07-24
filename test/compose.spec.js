@@ -128,17 +128,8 @@ describe('compose', function () {
 
                 render(ast, function (err, markdown) {
                     console.log(markdown)
-<<<<<<< Updated upstream
                     done();
                 });
-=======
-                    serialize(ast, function (err, source) {
-                        console.log(source)
-                        done();
-                    }, true);
-
-                }, true);
->>>>>>> Stashed changes
             });
         });
     });
