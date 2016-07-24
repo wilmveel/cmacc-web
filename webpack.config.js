@@ -1,8 +1,10 @@
+var path = require('path');
+
 module.exports = {
     entry: './src/cmacc.js',
 
     output: {
-        path: '/',
+        path: path.resolve(__dirname, "assets"),
         filename: "bundle.js",
         library: "cmacc"
     },
