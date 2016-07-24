@@ -4,7 +4,7 @@ var request = require("request");
 var imp = {
 
     readFile : function(file, callback){
-
+        console.log(file)
         if(/^http\:\/\//.test(file)){
             request(file, function (error, response, body) {
                 if (!error && response.statusCode == 200) {

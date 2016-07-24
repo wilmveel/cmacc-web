@@ -4,7 +4,8 @@
   "description": "$name = Willem Veelenturf",
   "main": "main.js",
   "scripts": {
-    "start": "node ./server.js",
+    "prestart":"./node_modules/.bin/webpack",
+    "start": "./node_modules/.bin/electron .",
     "postinstall": "bower install"
   },
   "author": "",
