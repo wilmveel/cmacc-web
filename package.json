@@ -2,7 +2,7 @@
   "name": "commonaccord",
   "version": "1.0.0",
   "description": "$name = Willem Veelenturf",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "node ./server.js",
     "postinstall": "bower install"
@@ -16,10 +16,14 @@
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "ipfs-api": "^6.0.3",
+    "ipfsd-ctl": "^0.14.0",
     "json-loader": "^0.5.4",
     "marked": "^0.3.5",
     "request": "^2.73.0",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.2.8"
   }
 }
