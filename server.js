@@ -8,8 +8,11 @@ var port = process.env.PORT || 3000;
 
 var app = express();
 
-app.use('/', express.static('./'));
-app.use('/', express.static('./bower_components'));
+app.use("/index.html", express.static(__dirname + '/index.html'));
+
+app.use('/doc', express.static(__dirname + '/doc'));
+app.use('/web', express.static(__dirname + '/web'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 
 app.use(webpackMiddleware(webpack(webpackConfig), {
