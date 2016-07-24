@@ -11,10 +11,10 @@ var port = process.env.PORT || 3000;
 var app = express();
 
 // Static
-app.use("/index.html", express.static(__dirname + '/index.html'));
-app.use('/doc', express.static(__dirname + '/doc'));
-app.use('/web', express.static(__dirname + '/web'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use("/index.html", express.static(process.cwd() + '/index.html'));
+app.use('/doc', express.static(process.cwd() + '/doc'));
+app.use('/web', express.static(process.cwd() + '/web'));
+app.use('/bower_components', express.static(process.cwd() + '/bower_components'));
 
 // Webpack
 app.use(webpackMiddleware(webpack(webpackConfig), {
