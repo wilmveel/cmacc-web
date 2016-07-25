@@ -18,7 +18,7 @@ npm install
 
 to run the electron app 
 ```sh
-./node_modules/.bin/electron .
+npm start
 ```
 
 ## Principles
