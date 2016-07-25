@@ -22,7 +22,7 @@ app.use('/ipfs', proxy(url.parse('https://gateway.ipfs.io/ipfs/')));
 app.use('/', express.static(process.cwd() + '/'));
 app.use('/doc', express.static(process.cwd() + '/doc'));
 app.use('/web', express.static(process.cwd() + '/web'));
-app.use('/bower_components', express.static(process.cwd() + '/bower_components'));
+app.use('/', express.static(process.cwd() + '/bower_components'));
 
 app.listen(port, function () {
     console.log('Example app listening on port 3000!');
