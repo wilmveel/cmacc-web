@@ -20,8 +20,7 @@ app.use('/ipfs', proxy(url.parse('https://gateway.ipfs.io/ipfs/')));
 
 // Static
 app.use('/', express.static(process.cwd() + '/'));
-app.use('/doc', express.static(process.cwd() + '/doc'));
-app.use('/web', express.static(process.cwd() + '/web'));
+app.use('/doc', express.static(process.cwd() + '/node_modules/cmacc-docs/doc'));
 app.use('/', express.static(process.cwd() + '/bower_components'));
 
 app.listen(port, function () {
