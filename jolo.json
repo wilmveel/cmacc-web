@@ -1,0 +1,57 @@
+{
+    "file": "/Users/willemveelenturf/projects/commonaccord/test/parser/ImportObjectOverwrite.md",
+    "variables": [
+        {
+            "key": "obj3",
+            "val": "{\n    \"hello1\" : \"World2\"\n}\n",
+            "loc": "obj3",
+            "type": "object",
+            "variables": [
+                {
+                    "type": "string",
+                    "key": "hello1",
+                    "val": "YOLO",
+                    "loc": "obj3.hello1"
+                }
+            ]
+        },
+        {
+            "key": "obj2",
+            "ref": "./Object.md",
+            "val": "{\n    \"obj1\" : obj3\n}",
+            "loc": "obj2",
+            "type": "object",
+            "variables": [
+                {
+                    "key": "str",
+                    "val": "Lala",
+                    "loc": "obj2.str",
+                    "type": "string"
+                },
+                {
+                    "type": "ref",
+                    "key": "obj1",
+                    "val": "obj3",
+                    "loc": "obj2.obj1",
+                    "link": {
+                        "key": "obj3",
+                        "val": "{\n    \"hello1\" : \"World2\"\n}\n",
+                        "loc": "obj3",
+                        "type": "object",
+                        "variables": [
+                            {
+                                "type": "string",
+                                "key": "hello1",
+                                "val": "YOLO",
+                                "loc": "obj3.hello1"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "file": "/Users/willemveelenturf/projects/commonaccord/test/parser/Object.md",
+            "src": "$ str = \"Lala\"\n\n$ obj1 = {\n    \"hello1\" : str\n}\n"
+        }
+    ],
+    "src": "$ obj3 = {\n    \"hello1\" : \"World2\"\n}\n\n$ obj2 = [./Object.md] => {\n    \"obj1\" : obj3\n}\n"
+}

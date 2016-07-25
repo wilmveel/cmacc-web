@@ -29,6 +29,7 @@ var resolve = function (variable, ast, callback) {
     variable.val.replace(regex.REGEX_KEYVALUE, function (found, key, val) {
 
         variable = variable || {};
+        variable.type = 'object';
         variable.variables = variable.variables || [];
 
         var key = key.match(regex.REGEX_STRING)[1];

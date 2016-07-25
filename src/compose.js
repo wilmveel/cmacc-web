@@ -15,7 +15,7 @@ var compose = function (file, parent, callback) {
 
         var variables = [];
         ast.variables.forEach(function (item, i) {
-            if(parent && parent) {
+            if(parent) {
                 var inject = helper.queryAst(parent, item.key)
                 if (inject) {
                     variables.push(inject);
@@ -39,16 +39,21 @@ var compose = function (file, parent, callback) {
         var exec = [];
         ast.variables.forEach(function (item, i) {
             exec.push(function (callback) {
-                resolve(ast.variables[i], ast, function (err, data) {
-                    if (ast.variables[i].ref && !ast.variables[i].src) {
-                        var location = url.resolve(ast.file, ast.variables[i].ref)
-                        compose(location, ast.variables[i], function (err, res) {
+                if(!ast.variables[i].type){
+                    resolve(ast.variables[i], ast, function (err, data) {
+                        if (ast.variables[i].ref && !ast.variables[i].src) {
+                            var location = url.resolve(ast.file, ast.variables[i].ref)
+                            compose(location, ast.variables[i], function (err, res) {
+                                callback();
+                            });
+                        } else {
                             callback();
-                        });
-                    } else {
-                        callback();
-                    }
-                });
+                        }
+                    });
+                }else {
+                    callback();
+                }
+
             });
         });
 

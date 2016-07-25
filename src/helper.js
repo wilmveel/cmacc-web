@@ -6,7 +6,7 @@ var helper = {
         return mergeJson.merge(obj1, obj2);
     },
 
-    queryAst: function (ast, key) {
+    queryAst: function (ast, key, link) {
 
         var res = null;
         var current = ast;
@@ -18,7 +18,7 @@ var helper = {
                 current.variables.forEach(function (v, k) {
                     if (v.key === key) {
                         if (current.variables && current.variables[k]) {
-                            if(current.variables[k].link){
+                            if(link && current.variables[k].link){
                                 res = current.variables[k].link;
                                 current = current.variables[k].link;
                             }else{

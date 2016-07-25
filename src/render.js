@@ -13,7 +13,7 @@ var render = function (ast, callback, editor) {
 
         exec[key] = function (callback) {
 
-            var res = helper.queryAst(ast, key) || {};
+            var res = helper.queryAst(ast, key, true) || {};
 
             if (res.text) {
                 return render(res, function (ast, text) {
