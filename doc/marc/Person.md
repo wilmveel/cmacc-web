@@ -1,3 +1,3 @@
-$ name = ""
+$ name = "name"
 
-$ city = ""
+$ city = "city"
