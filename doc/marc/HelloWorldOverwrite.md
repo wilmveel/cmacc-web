@@ -1,6 +1,6 @@
-$ person = [./MarcDangeard.md] => {
-    "name" : "Willem",
-    "city" : "Utrecht"
+$ content = [./HelloWorld.md] => {
+	"person.name" : "Pierre",
+	"person.city" : "London"
 }
-    
-My name is {{person.name}} and I live in {{person.city}}
+
+{{content}}
