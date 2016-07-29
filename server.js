@@ -19,8 +19,9 @@ app.use(webpackMiddleware(webpack(webpackConfig), {
 app.use('/ipfs', proxy(url.parse('https://gateway.ipfs.io/ipfs/')));
 
 // Static
-app.use('/', express.static(process.cwd() + '/'));
-app.use('/doc', express.static(process.cwd() + '/node_modules/cmacc-docs/doc'));
+app.use('/doc', require('./api/docApi'));
+
+app.use('/', express.static(process.cwd() + '/public'));
 app.use('/', express.static(process.cwd() + '/bower_components'));
 
 app.listen(port, function () {

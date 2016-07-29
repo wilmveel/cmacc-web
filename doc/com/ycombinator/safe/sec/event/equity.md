@@ -1,0 +1,6 @@
+$ def = [../defined_terms.md]
+
+1. If there is an {{def.Equity_Financing}} before the expiration or termination of this instrument, the {{def.Company}} will automatically issue to the Investor a number of shares of Safe Preferred Stock equal to the {{def.Purchase_Amount}} divided by the {{def.Conversion_Price}}.
+2. In connection with the issuance of Safe Preferred Stock by the {{def.Company}} to the Investor pursuant to this Section 1:
+    1. The Investor will execute and deliver to the {{def.Company}} all transaction documents related to the {{def.Equity_Financing}}; provided, that such documents are the same documents to be entered into with the purchasers of Standard Preferred Stock, with appropriate variations for the Safe Preferred Stock if applicable, and provided further, that such documents have customary exceptions to any drag-along applicable to the Investor, including, without limitation, limited representations and warranties and limited liability and indemnification obligations on the part of the Investor; and  
+    2. The Investor and the {{def.Company}} will execute a Pro Rata Rights Agreement, unless the Investor is already included in such rights in the transaction documents related to the {{def.Equity_Financing}}.

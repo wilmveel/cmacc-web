@@ -1,0 +1,3 @@
+$ name = "Marc"
+
+$ city = "Paris"

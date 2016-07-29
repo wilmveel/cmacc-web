@@ -1,0 +1,3 @@
+$ def = [../defined_terms.md]
+
+This instrument will expire and terminate (without relieving the Company of any obligations arising from a prior breach of or non-compliance with this instrument) upon either (i) the issuance of stock to the Investor pursuant to Section 1.1 or Section 1.2.2; or (ii) the payment, or setting aside for payment, of amounts due the Investor pursuant to Section 1.2.1 or Section 1.3.
