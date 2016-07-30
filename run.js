@@ -10,6 +10,9 @@ var input = process.argv[2];
 
 var file = path.join(__dirname, input);
 
+file = 'file://' + file;
+
+console.log(file)
 
 cmacc.compose(file, null, function (err, ast) {
 

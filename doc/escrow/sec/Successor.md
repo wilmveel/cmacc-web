@@ -1,0 +1,1 @@
+*Successors*. The rights created by this Escrow Agreement shall inure to the benefit of, and the obligations created hereby shall be binding upon the successors and assigns of the Escrow Agent and all parties to this Escrow Agreement.

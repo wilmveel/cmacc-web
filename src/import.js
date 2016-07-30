@@ -7,8 +7,6 @@ var imp = {
 
     readFile : function(file, callback){
 
-        console.log('file', file)
-
         var parse = url.parse(file);
 
         if(!parse.protocol)
@@ -46,7 +44,11 @@ var imp = {
 
         }
 
-        fs.readFile(file, 'utf8', callback);
+        if(parse.protocol === "file:"){
+            fs.readFile(parse.path, 'utf8', callback);
+        }
+
+
 
     }
 

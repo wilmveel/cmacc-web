@@ -1,6 +1,4 @@
-$ role = null
-
-$ person = [./person.md]
+$ person = [../id/Person.md]
 
 Role: {{role}}
 
