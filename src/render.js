@@ -8,12 +8,14 @@ var render = function (ast, callback, editor) {
 
     var exec = {};
 
+    if (!ast.text)
+        return callback('Cannot render text not available.');
 
     ast.text.replace(regex.REGEX_INJECT, function (found, enter, prefix, key) {
 
         exec[key] = function (callback) {
 
-            var res = helper.queryAst(ast, key) || {};
+            var res = helper.queryAst(ast, key, true) || {};
 
             if (res.text) {
                 return render(res, function (ast, text) {

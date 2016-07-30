@@ -29,6 +29,7 @@ var resolve = function (variable, ast, callback) {
     variable.val.replace(regex.REGEX_KEYVALUE, function (found, key, val) {
 
         variable = variable || {};
+        variable.type = 'object';
         variable.variables = variable.variables || [];
 
         var key = key.match(regex.REGEX_STRING)[1];
@@ -38,7 +39,8 @@ var resolve = function (variable, ast, callback) {
                 type:'null',
                 key: key,
                 val: null,
-                loc: ast.loc + "." + key
+                loc: ast.loc + "." + key,
+                over: true
             });
             return found;
         }
@@ -49,7 +51,8 @@ var resolve = function (variable, ast, callback) {
                 type:'string',
                 key: key,
                 val: val,
-                loc: variable.loc + "." + key
+                loc: variable.loc + "." + key,
+                over: true
             });
             return found;
         }
@@ -62,7 +65,8 @@ var resolve = function (variable, ast, callback) {
             key: key,
             val: val,
             loc: variable.loc + "." + key,
-            link: res
+            link: res,
+            over: true
         });
 
         return found;

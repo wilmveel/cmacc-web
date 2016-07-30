@@ -13,7 +13,8 @@ var parser = function (file, callback) {
 
     imp.readFile(file, function (err, text) {
 
-        if (err) return callback(err)
+        if (err)
+            return callback(err)
 
         ast.src = text;
 

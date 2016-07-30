@@ -14,10 +14,9 @@ $ what = [./what.md]
 $ misc = [./general_clauses.md]
 
 $ closing = [./closing.md] => {
-	"sign_party1" : party1.name,
-	"sign_party2" : party2.name
+	"party1" : party1,
+	"party2" : party2
 }
-
 
 {{intro}}
 

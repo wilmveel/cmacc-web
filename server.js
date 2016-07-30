@@ -6,7 +6,7 @@ var webpackMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('./webpack.config');
 var proxy = require('proxy-middleware');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 
 var app = express();
 

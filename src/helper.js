@@ -6,7 +6,7 @@ var helper = {
         return mergeJson.merge(obj1, obj2);
     },
 
-    queryAst: function (ast, key) {
+    queryAst: function (ast, key, link) {
 
         var res = null;
         var current = ast;
@@ -14,19 +14,21 @@ var helper = {
         var keys = key.split('.');
         for (var i in keys) {
             var key = keys[i];
-            if(current.variables) {
+            if (current.variables) {
                 current.variables.forEach(function (v, k) {
                     if (v.key === key) {
-                        if (current.variables && current.variables[k]) {
-                            if(current.variables[k].link){
-                                res = current.variables[k].link;
-                                current = current.variables[k].link;
-                            }else{
-                                res = current.variables[k];
-                                current = current.variables[k];
+                        var variable = current.variables[k]
+                        if (link && variable.link) {
+                            while(variable.link){
+                                variable = variable.link;
+                                res = variable;
+                                current = variable;
                             }
-
+                        } else {
+                            res = variable;
+                            current = variable;
                         }
+
                     }
                 });
             }

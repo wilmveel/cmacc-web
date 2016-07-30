@@ -7,7 +7,12 @@ var imp = {
 
     readFile : function(file, callback){
 
+        console.log('file', file)
+
         var parse = url.parse(file);
+
+        if(!parse.protocol)
+            return callback(null, file);
 
         if(typeof window != 'undefined' && window.document){
 

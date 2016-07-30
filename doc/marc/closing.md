@@ -1,10 +1,23 @@
-$ sign_party1 = null
+$ party1 = [./person.md]
 
-$ sign_party2 = null
+$ party2 = [./person.md]
 
+$ signParty1 = [./sign.md] => {
+    "role": "Party1",
+    "person": party1
+}
+
+$ signParty2 = [./sign.md] => {
+    "role": "Party2",
+    "person": party2
+}
 
 IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.
 
-{{sign_party1}}
- 
-{{sign_party2}}
+
+<table width="100%">
+<tr>
+<td>{{signParty1}}</td>
+<td>{{signParty2}}</td>
+</tr>
+</table>

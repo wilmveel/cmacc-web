@@ -135,7 +135,6 @@
 
             this.page = 0;
             this.files = [
-                'ipfs://QmSaMttrBoGbTQ2k8mFPkHAWjgkbcpu4454wwzo5jsMQis/',
                 '/doc/test.md',
                 '/doc/marc/HelloWorld.md',
                 '/doc/marc/HelloWorldOverwrite.md',
@@ -147,8 +146,11 @@
         },
         attached: function () {
             var doc = this.getDoc();
-            if (doc)
-                this.$.ast.file = doc;
+            if (doc){
+                var root =  location.protocol + "//" + location.host;
+                this.$.ast.file = root + doc;
+            }
+
             else
                 document.getElementById('left').toggle();
         },
@@ -157,7 +159,8 @@
         },
         go: function (e) {
             console.log(e.model.item);
-            this.$.ast.file = e.model.item;
+            var root =  location.protocol + "//" + location.host;
+            this.$.ast.file = root + e.model.item;
             document.getElementById('left').toggle();
         },
         getDoc: function () {
