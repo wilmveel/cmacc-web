@@ -25,4 +25,5 @@ $ closing = [./closing.md] => {
 	"party1" : party1,
 	"party2" : party2
 }
+
 {{content}}
