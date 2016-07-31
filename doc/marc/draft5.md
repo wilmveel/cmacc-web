@@ -2,7 +2,7 @@ $ party1 = [./MarcDangeard.md]
 
 $ party2 = [./WillemVeelenturf.md]
 
-$ content = [./draft1.md] => {
+$ content = [./draft3.md] => {
 	"misc" : misc,
 	"party2" : party2
 }
