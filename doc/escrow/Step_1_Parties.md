@@ -1,10 +1,27 @@
-$ disputeNoticeWithindays = "5"
+$ deal = {
+    "disputeNoticeWithindays" : "5 days",
+    "deliveryClaimDelay" : "24 hours",
+    "deliveryPaymentTimeSpan" = "48 hours"
+    "escrowFee" : "$1.50"
+}
 
-$ deliveryClaimDelay = "24 hours"
+$ seller = [./id/Gerrys_Grapes_llc.md]
 
-$ deliveryPaymentTimeSpan = "48 hours"
+$ escrow = [./id/Safe_Hands_inc.md]
 
-$ escrowFee = "$1.50"
+$ shipper = [./id/Fabulous_Express_inc.md]
 
-$ sellerDear = "Dear Gerry"
+$ arbitrator = [./id/Solomon_Shirley.md]
 
+$ purchaser = [./id/_Party.md]
+
+$ form = [./form/Escrow.md] => {
+    "deal": deal,
+    "seller" : seller,
+    "escrow" : escrow,
+    "shipper" : shipper,
+    "arbitrator" : arbitrator,
+    "purchaser" : purchaser,
+}
+
+{{form}}

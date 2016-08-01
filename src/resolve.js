@@ -59,7 +59,7 @@ var resolve = function (variable, ast, callback) {
 
 
 
-        var res = helper.queryAst(ast, val);
+        var res = helper.queryAst(ast, val, true);
         variable.variables.push({
             type:'ref',
             key: key,

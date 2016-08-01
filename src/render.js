@@ -52,7 +52,7 @@ var render = function (ast, callback, editor) {
         if (editor) {
             text = text.replace(/^(.*)$/gm, function (found) {
 
-                return found.replace(/^(\s*)((?:\>\s)|(?:\d\.\s))?(.*)$/, function (r, space, pre, cont) {
+                return found.replace(/^(\s*)((?:\-\s)|(?:\>\s)|(?:\d\.\s)|(?:\d\d\.\s))?(.*)$/, function (r, space, pre, cont) {
                     if (cont)
                         return (space || '') +
                             (pre || '') +
