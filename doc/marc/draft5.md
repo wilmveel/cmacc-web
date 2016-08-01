@@ -25,6 +25,8 @@ $ closing = [./closing.md] => {
 
 1. {{who}}
 
-2. {{misc.clause2}}
+2. {{misc.clause3}}
+
+3. {{misc.clause5}}
 
 {{closing}}
