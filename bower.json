@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "cmacc-elements": "wilmveel/cmacc-elements"
+    "cmacc-elements": "wilmveel/cmacc-elements#ui"
   }
 }
