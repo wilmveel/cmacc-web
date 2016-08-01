@@ -10,4 +10,4 @@ $ address = "address"
 
 $ zipcode = "zipcode"
 
-$ city = [../geo/city/_City.md]
+$ city = [../geo/country/state/county/city/_City.md]

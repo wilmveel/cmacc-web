@@ -12,4 +12,4 @@ $ address = "666 Winding Drive"
 
 $ zipcode = "02142"
 
-$ city = [../geo/city/Woodstock.md]
+$ city = [../geo/USA/NY/Ulster/city/Woodstock.md]
