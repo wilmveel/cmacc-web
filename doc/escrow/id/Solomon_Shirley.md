@@ -6,4 +6,4 @@ $ address = "100 Mission Street"
 
 $ zipcode = "94103"
 
-$ city = [../geo/city/Cambridge.md]
+$ city = [../geo/USA/MA/Middlesex/city/Cambridge.md]
