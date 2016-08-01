@@ -140,7 +140,6 @@
                 this.$.dialog.open(variable)
             }.bind(this), true);
 
-            this.root = location.protocol + "//" + location.host;
             this.page = 0;
             this.files = [
                 'ipfs://QmSaMttrBoGbTQ2k8mFPkHAWjgkbcpu4454wwzo5jsMQis/',
@@ -156,7 +155,7 @@
         attached: function () {
             var doc = this.getDoc();
             if (doc)
-                this.file = this.root + doc;
+                this.load(doc);
             else
                 document.getElementById('left').toggle();
         },
@@ -170,8 +169,15 @@
         },
 
         go: function (e) {
-            this.file = this.root + e.model.item;
+            this.load(e.model.item);
             document.getElementById('left').toggle();
+        },
+
+        load: function(urlString){
+            var root = location.protocol + "//" + location.host;
+            var url = new URL(urlString, root);
+            this.file = url.href;
+
         },
 
         getDoc: function () {

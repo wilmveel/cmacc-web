@@ -1,19 +1,18 @@
 $ test1 = "ld"
 
 $ test2 = {
-	"test" : "Wor123"
+    "test" : "Wor"
 }
 
-$ test3 = [./Object.md] => {
-}
+$ test3 = [./Object.md]
 
 $ obj = {
-	"hel" : test2.test
-	"lo" : test1
+    "hel" : test2.test,
+    "lo" : test1
 }
 
 $ test4 = [./Object.md] => {
-	"obj" : obj
+    "obj": obj
 }
 
 1 - Hello Wor{{test1}}
@@ -23,4 +22,3 @@ $ test4 = [./Object.md] => {
 3 - {{test3}}
 
 4 - {{test4}}
-
