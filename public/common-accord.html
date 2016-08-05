@@ -1,0 +1,46 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<link rel="import" href="./cmacc-elements/cmacc-app.html">
+
+<dom-module id="common-accord">
+
+    <template>
+        <cmacc-app id="ast" files="{{files}}" ast="{{ast}}"></cmacc-app>
+    </template>
+
+</dom-module>
+
+
+<script>
+    Polymer({
+        is: 'common-accord',
+
+        properties: {
+            ast: {
+                type: Object
+            },
+            files: {
+                type: Array
+            }
+        },
+
+        attached: function () {
+
+            var files = [
+                'doc/test.md',
+                'doc/marc/HelloWorld.md',
+                'doc/marc/HelloWorldOverwrite.md',
+                'doc/acme/angel-round/SAFE_Robinson.md',
+                'doc/acme/angel-round/SAFE_Robinson_v2.md',
+                'doc/acme/angel-round/safe_robinson_v3.md'
+            ];
+
+            this.set('files', files);
+
+        }
+
+    });
+</script>
