@@ -17,5 +17,6 @@
     "proxy-middleware": "^0.15.0",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1"
-  }
+  },
+  "cacheDirectories": []
 }

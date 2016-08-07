@@ -17,6 +17,5 @@
   ],
   "dependencies": {
     "cmacc-elements": "wilmveel/cmacc-elements#ui"
-  },
-  "cacheDirectories": []
+  }
 }
