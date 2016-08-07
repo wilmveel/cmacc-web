@@ -8,7 +8,7 @@
 <dom-module id="common-accord">
 
     <template>
-        <cmacc-app id="ast" files="{{files}}" ast="{{ast}}"></cmacc-app>
+        <cmacc-app id="ast" base="{{base}}" files="{{files}}" ast="{{ast}}"></cmacc-app>
     </template>
 
 </dom-module>
@@ -25,6 +25,21 @@
             files: {
                 type: Array
             }
+        },
+
+        ready: function () {
+            this.base = window.location.href;
+
+            console.log(this.base, window.location.href);
+            this.addEventListener("cmacc-link", function (e) {
+                var ref = e.detail.data;
+                var file = cmacc.resolve(this.ast.file, ref);
+                console.log('GO', ref, this.ast.file, file);
+                this.file = file;
+
+                window.open(this.base + '?doc=' + file, '_blank');
+            }.bind(this), true);
+
         },
 
         attached: function () {
