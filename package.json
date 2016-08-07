@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./server.js",
-    "postinstall": "bower install && bower update"
+    "postinstall": "bower install"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,5 @@
     "proxy-middleware": "^0.15.0",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1"
-  },
-  "cacheDirectories": []
+  }
 }
