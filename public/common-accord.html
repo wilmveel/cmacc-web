@@ -28,7 +28,7 @@
         },
 
         ready: function () {
-            this.base = window.location.href;
+            this.base = location.protocol + "//" + location.host;
 
             console.log(this.base, window.location.href);
             this.addEventListener("cmacc-link", function (e) {
@@ -45,12 +45,18 @@
         attached: function () {
 
             var files = [
-                'doc/test.md',
-                'doc/marc/HelloWorld.md',
-                'doc/marc/HelloWorldOverwrite.md',
-                'doc/acme/angel-round/SAFE_Robinson.md',
-                'doc/acme/angel-round/SAFE_Robinson_v2.md',
-                'doc/acme/angel-round/safe_robinson_v3.md'
+                'doc/test.cmacc',
+                'doc/marc/HelloWorld.cmacc',
+                'doc/marc/HelloWorldOverwrite.cmacc',
+                'doc/marc/draft1.cmacc',
+                'doc/marc/draft2.cmacc',
+                'doc/marc/draft3.cmacc',
+                'doc/marc/draft4.cmacc',
+                'doc/marc/draft5.cmacc',
+                'doc/marc/draft6.cmacc',
+                'doc/acme/angel-round/SAFE_Robinson.cmacc',
+                'doc/acme/angel-round/SAFE_Robinson_v2.cmacc',
+                'doc/acme/angel-round/safe_robinson_v3.cmacc'
             ];
 
             this.set('files', files);

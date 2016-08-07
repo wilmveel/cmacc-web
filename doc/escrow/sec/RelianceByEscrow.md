@@ -1,1 +1,0 @@
-*Reliance by Escrow Agent*. The Escrow Agent may act in reliance upon any writing, instrument, or signature that the Escrow Agent, in good faith, believes to be genuine; and may assume any person purporting to give any notice, writing, advice, or instructions in connection with any provision herein has been duly authorized to do so.

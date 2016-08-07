@@ -1,3 +1,0 @@
-$ name = "James"
-
-$ city = "Boston"
