@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "cmacc-compiler": "wilmveel/cmacc-compiler",
-    "cmacc-docs": "wilmveel/cmacc-docs",
+    "cmacc-compiler": "wilmveel/cmacc-compiler#master",
+    "cmacc-docs": "wilmveel/cmacc-docs#master",
     "express": "^4.14.0",
     "proxy-middleware": "^0.15.0",
     "webpack": "^1.13.1",
