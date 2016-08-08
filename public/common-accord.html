@@ -6,9 +6,31 @@
 <link rel="import" href="./cmacc-elements/cmacc-app.html">
 
 <dom-module id="common-accord">
-
+    <style>
+        paper-fab {
+            position: absolute;
+            top: 35px;
+            right: 20px;
+            z-index: 0;
+            --paper-fab-background: #FF6600
+        }
+    </style>
     <template>
-        <cmacc-app id="ast" base="{{base}}" files="{{files}}" ast="{{ast}}"></cmacc-app>
+
+        <iron-ajax
+                id="ajax"
+                url="{{file}}"
+                method="POST"
+                content-type="text/plain"
+                on-response="handleResponse"
+                debounce-duration="300"></iron-ajax>
+
+        <paper-toast id="toast" text="Saved succesfull"></paper-toast>
+
+        <cmacc-app id="ast" base="{{base}}" file="{{file}}" files="{{files}}" ast="{{ast}}">
+            <paper-fab icon="save" on-tap="save"></paper-fab>
+        </cmacc-app>
+
     </template>
 
 </dom-module>
@@ -33,8 +55,7 @@
             console.log(this.base, window.location.href);
             this.addEventListener("cmacc-link", function (e) {
                 var ref = e.detail.data;
-                var file = cmacc.resolve(this.ast.file, ref);
-                console.log('GO', ref, this.ast.file, file);
+                var file = cmacc.resolve(this.file, ref);
                 this.file = file;
 
                 window.open(this.base + '?doc=' + file, '_blank');
@@ -61,6 +82,17 @@
 
             this.set('files', files);
 
+        },
+
+        save: function () {
+            cmacc.serialize(this.ast, function(err, source){
+                this.$.ajax.body = source;
+                this.$.ajax.generateRequest();
+            }.bind(this))
+        },
+
+        handleResponse: function(){
+            this.$.toast.open();
         }
 
     });
