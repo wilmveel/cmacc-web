@@ -28,15 +28,11 @@ Example of ycombinator
 node ./run.js ./doc/acme/angel-round/safe_robinson.md
 ```
 
-or
+Output will be in files
 
-```
-node ./run.js ./doc/acme/angel-round/safe_robinson_v2_.md
-```
-
-Output will be int foder
-
-./build/index.html
+./run.json
+./run.md
+./run.html
 
 ## Principles
 

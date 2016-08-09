@@ -1,0 +1,99 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<link rel="import" href="./cmacc-elements/cmacc-app.html">
+
+<dom-module id="common-accord">
+    <style>
+        paper-fab {
+            position: absolute;
+            top: 35px;
+            right: 20px;
+            z-index: 0;
+            --paper-fab-background: #FF6600
+        }
+    </style>
+    <template>
+
+        <iron-ajax
+                id="ajax"
+                url="{{file}}"
+                method="POST"
+                content-type="text/plain"
+                on-response="handleResponse"
+                debounce-duration="300"></iron-ajax>
+
+        <paper-toast id="toast" text="Saved succesfull"></paper-toast>
+
+        <cmacc-app id="ast" base="{{base}}" file="{{file}}" files="{{files}}" ast="{{ast}}">
+            <paper-fab icon="save" on-tap="save"></paper-fab>
+        </cmacc-app>
+
+    </template>
+
+</dom-module>
+
+
+<script>
+    Polymer({
+        is: 'common-accord',
+
+        properties: {
+            ast: {
+                type: Object
+            },
+            files: {
+                type: Array
+            }
+        },
+
+        ready: function () {
+            this.base = location.protocol + "//" + location.host;
+
+            console.log(this.base, window.location.href);
+            this.addEventListener("cmacc-link", function (e) {
+                var ref = e.detail.data;
+                var file = cmacc.resolve(this.file, ref);
+                this.file = file;
+
+                window.open(this.base + '?doc=' + file, '_blank');
+            }.bind(this), true);
+
+        },
+
+        attached: function () {
+
+            var files = [
+                'doc/test.cmacc',
+                'doc/marc/HelloWorld.cmacc',
+                'doc/marc/HelloWorldOverwrite.cmacc',
+                'doc/marc/draft1.cmacc',
+                'doc/marc/draft2.cmacc',
+                'doc/marc/draft3.cmacc',
+                'doc/marc/draft4.cmacc',
+                'doc/marc/draft5.cmacc',
+                'doc/marc/draft6.cmacc',
+                'doc/acme/angel-round/SAFE_Robinson.cmacc',
+                'doc/acme/angel-round/SAFE_Robinson_v2.cmacc',
+                'doc/acme/angel-round/safe_robinson_v3.cmacc'
+            ];
+
+            this.set('files', files);
+
+        },
+
+        save: function () {
+            cmacc.serialize(this.ast, function(err, source){
+                this.$.ajax.body = source;
+                this.$.ajax.generateRequest();
+            }.bind(this))
+        },
+
+        handleResponse: function(){
+            this.$.toast.open();
+        }
+
+    });
+</script>
