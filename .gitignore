@@ -1,9 +1,7 @@
 .idea
 .DS_Store
-<<<<<<< HEAD
-=======
 npm-debug.log
->>>>>>> 83664f117b37f2e2db9f3a658dfa95058f2ef2d6
+
 
 node_modules
 bower_components
