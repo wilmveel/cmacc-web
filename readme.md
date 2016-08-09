@@ -14,25 +14,13 @@ Go into this folder and run the following command
 npm install
 ```
 
-## Usage
+## Start
 
-To run the parser use the following command from the root of this project
-
-```
-node ./run.js <input> <output>
-```
-
-Example of ycombinator
+To run the server
 
 ```
-node ./run.js ./doc/acme/angel-round/safe_robinson.md
+npm start
 ```
-
-Output will be in files
-
-./run.json
-./run.md
-./run.html
 
 ## Principles
 
