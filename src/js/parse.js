@@ -1,4 +1,5 @@
 var path = require('path');
+var convert = require('./convert');
 
 function parse(js) {
     if (js.length > 0) {
@@ -12,9 +13,10 @@ function parse(js) {
 }
 
 function parseObj(js) {
+    console.log(js);
     if (js.file) {
         var file = path.join(__dirname, js.file);
-        var next = parse(require(file));
+        var next = parse(convert(file));
         js.file = next;
         if (!js.vars) {
             js.vars = next.vars;

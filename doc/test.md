@@ -4,14 +4,14 @@ $ test2 = {
     "test" : "Wor"
 }
 
-$ test3 = [./Object.md]
+$ test3 = [../../doc/Object.md]
 
 $ obj = {
     "hel" : test2.test,
     "lo" : test1
 }
 
-$ test4 = [./Object.md] => {
+$ test4 = [../../doc/Object.md] => {
     "obj": obj
 }
 
