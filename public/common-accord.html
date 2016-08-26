@@ -1,10 +1,11 @@
 <!-- Imports polymer -->
 <link rel="import" href="../polymer/polymer.html">
 
+<link rel="import" href="../paper-fab/paper-fab.html">
+
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 
 <link rel="import" href="./cmacc-elements/cmacc-app.html">
-<link rel="import" href="./cmacc-new.html">
 
 <dom-module id="common-accord">
     <style>
@@ -13,7 +14,7 @@
             position: absolute;
             top: 35px;
             right: 20px;
-            z-index: 0;
+            z-index: 1;
         }
 
         paper-fab#add {
@@ -21,7 +22,7 @@
             position: fixed;
             bottom: 35px;
             right: 280px;
-            z-index: 0;
+            z-index: 1;
         }
     </style>
     <template>
