@@ -20,6 +20,7 @@ app.use('/ipfs', proxy(url.parse('https://gateway.ipfs.io/ipfs/')));
 
 // Static
 app.use('/doc', require('./api/docApi'));
+app.use('/files', require('./api/filesApi'));
 app.use('/dist', require('./api/vulcanizeApi'));
 
 app.use('/', express.static(process.cwd() + '/public'));

@@ -1,0 +1,82 @@
+<!-- Imports polymer -->
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<link rel="import" href="../app-layout/app-toolbar/app-toolbar.html">
+
+<dom-module id="cmacc-new">
+
+    <style>
+
+        app-toolbar {
+            background-color: #4285f4;
+            color: #fff;
+        }
+
+        paper-fab {
+            position: absolute;
+            top: 35px;
+            right: 20px;
+            --paper-fab-background: #FF6600
+        }
+
+        paper-dialog {
+            width: 600px;
+            height: 400px;
+            overflow: auto;
+            padding: 0;
+        }
+    </style>
+    <template>
+
+        <iron-ajax
+                id="ajax"
+                url="/files"
+                method="POST"
+                content-type="application/json"
+                last-response="{{files}}"
+                debounce-duration="300"></iron-ajax>
+
+        <paper-dialog id="dialog">
+            <app-toolbar>
+                <div>Add new file</div>
+                <paper-fab icon="save" on-tap="save"></paper-fab>
+            </app-toolbar>
+            <div>
+                <paper-input value="{{path}}"></paper-input>
+                <paper-button></paper-button>
+            </div>
+        </paper-dialog>
+
+    </template>
+
+</dom-module>
+
+
+<script>
+    Polymer({
+        is: 'cmacc-new',
+
+        properties: {
+            path: String
+        },
+
+        open: function(){
+            this.$.dialog.open();
+        },
+
+        save: function(){
+            this.$.ajax.url = this.path;
+            this.$.ajax.generateRequest();
+            this.fire('cmacc-select-file', this.path);
+            this.$.dialog.close();
+        }
+
+
+    });
+</script>

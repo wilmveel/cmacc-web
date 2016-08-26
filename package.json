@@ -15,6 +15,7 @@
     "cmacc-compiler": "wilmveel/cmacc-compiler#master",
     "cmacc-docs": "wilmveel/cmacc-docs#master",
     "express": "^4.14.0",
+    "mkdirp": "^0.5.1",
     "proxy-middleware": "^0.15.0",
     "vulcanize": "^1.14.8",
     "webpack": "^1.13.1",
