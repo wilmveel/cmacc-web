@@ -1,5 +1,5 @@
 var fs = require('fs');
-var md = require('./bower_components/marked/marked.min');
+var md = require('marked');
 var path = require('path');
 
 var convert = require('./src/js/convert');
@@ -11,13 +11,13 @@ var render = require('./src/js/render');
 var input = process.argv[2] || '/doc/test.md';
 var file = convert(path.join(__dirname, input));
 
-// var ast = parse(file);
+var ast = parse(file);
 
-// var resolved = resolve(ast);
+var resolved = resolve(ast);
 
-// var rendered = render(resolved);
+var rendered = render(resolved);
 
-output(file);
+output(rendered);
 
 function output(result) {
     // result = md(result);

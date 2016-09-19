@@ -2,18 +2,6 @@ var path = require('path');
 var convert = require('./convert');
 
 function parse(js) {
-    if (js.length > 0) {
-        for (var i = 0; i < js.length; i++) {
-            js[i] = parse(js[i]);
-        }
-    } else {
-        return parseObj(js);
-    }
-    return js;
-}
-
-function parseObj(js) {
-    console.log(js);
     if (js.file) {
         var file = path.join(__dirname, js.file);
         var next = parse(convert(file));
@@ -22,16 +10,22 @@ function parseObj(js) {
             js.vars = next.vars;
         } else {
             var nextKeys = Object.keys(next.vars);
-            nextKeys.forEach(function(key) {
-                if (js.vars[key]) {}
+            nextKeys.forEach(function (key) {
+                if (js.vars[key]) {
+                }
                 else {
-                    js.vars[key] = next.vars[key];
+                    js.vars[key] = parse(next.vars[key]);
                 }
             });
         }
         js.text = next.text;
         js.type = next.type;
         delete js.file;
+    } else if (js.vars) {
+        var vars = Object.keys(js.vars);
+        vars.forEach(function(key) {
+            js.vars[key] = parse(js.vars[key]);
+        });
     } else if (typeof js.text === 'object') {
         js.text = parse(js.text);
     }

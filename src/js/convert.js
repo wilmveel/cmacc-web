@@ -33,10 +33,7 @@ function convert(file) {
     res += 'text : ' + JSON.stringify(md, null, 4) + '\n';
     res += '};' + '\n';
 
-    //return res;
     return eval(res);
 }
-
-console.log(convert('../../doc/helloworld.md'))
 
 module.exports = convert;

@@ -1,16 +1,5 @@
-function render(ast) {
-    var doc = '';
-    if (ast.length > 0) {
-        for (var i = 0; i < ast.length; i++) {
-            doc += render(ast[i]);
-        }
-    } else {
-        doc += renderObj(ast);
-    }
-    return doc;
-}
-
-function renderObj(obj) {
+function render(obj) {
+    console.log(obj);
     var text = '';
     if (obj.text && obj.text.text) {
         text += render(obj.text);
