@@ -24,15 +24,6 @@ function convert(file) {
         return '';
     });
 
-    md = marked.lexer(md);
-
-    md.map(function(line){
-        line.text = line.text.replace(regex.REGEX_INJECT, function(match, enter, spaces, key){
-            return ' + vars.' + key + ' + '
-        })
-        return line;
-    })
-
     res += 'module.exports = {' + '\n';
     res += 'vars : {' + '\n';
     res += vars.map(function(vari){
