@@ -14,7 +14,9 @@ function convert(file) {
         vars.push(key);
         res += 'var ' + key + ' = ';
         if (ref) {
-            res += '{\tfile : "' + ref + '",\n';
+            var dir = path.dirname(file);
+            var resolve = path.resolve(dir, ref);
+            res += '{\tfile : "' + resolve + '",\n';
             if (val) res += '\tvars : ' + val + '}\n';
             else if (!val) res += '}';
         } else if (!ref) {
@@ -33,7 +35,14 @@ function convert(file) {
     res += 'text : ' + JSON.stringify(md, null, 4) + '\n';
     res += '};' + '\n';
 
-    return eval(res);
+    try{
+        return eval(res);
+    }catch (e){
+        var e = new Error(e);
+        e.file = file
+        throw(e)
+    }
+
 }
 
 module.exports = convert;

@@ -2,8 +2,9 @@ var path = require('path');
 var convert = require('./convert');
 
 function parse(js) {
+
     if (js.file) {
-        var file = path.join(__dirname, js.file);
+        var file = path.join(js.file);
         var next = parse(convert(file));
         js.file = next;
         if (!js.vars) {
@@ -24,7 +25,7 @@ function parse(js) {
     } else if (js.vars) {
         var vars = Object.keys(js.vars);
         vars.forEach(function(key) {
-            js.vars[key] = parse(js.vars[key]);
+            js.vars[key] = js.vars[key] ? parse(js.vars[key]) : null;
         });
     } else if (typeof js.text === 'object') {
         js.text = parse(js.text);

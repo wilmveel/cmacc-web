@@ -1,7 +1,7 @@
 $ deal = {
     "disputeNoticeWithindays" : "5 days",
     "deliveryClaimDelay" : "24 hours",
-    "deliveryPaymentTimeSpan" = "48 hours"
+    "deliveryPaymentTimeSpan" : "48 hours",
     "escrowFee" : "$1.50"
 }
 
