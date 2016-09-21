@@ -9,7 +9,17 @@ function convert(file) {
     var res = '';
     var vars = [];
 
-    var text = fs.readFileSync(file, 'utf8');
+    var text = null;
+
+    try{
+        text = fs.readFileSync(file, 'utf8');
+    }catch (e){
+        throw(e)
+    }
+
+    // Add enter for failing regex
+    if(text.slice(-1) !== '\n')
+        text = text + '\n';
 
     var md = text.replace(regex.REGEX_VARIABLE, function (match, key, ref, val) {
         vars.push(key);
@@ -31,7 +41,10 @@ function convert(file) {
             if (val) res += '\tvars : ' + val + '}\n';
             else if (!val) res += '}';
         } else if (!ref) {
-            if (val) res+= val;
+            if (val)
+                res+= val;
+            else
+                res+= 'null';
         }
         res += ';\n\n';
         return '';
@@ -49,8 +62,7 @@ function convert(file) {
     try{
         return eval(res);
     }catch (e){
-        var e = new Error(e);
-        e.file = file
+        e.file = file;
         throw(e)
     }
 

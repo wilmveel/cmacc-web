@@ -1,4 +1,4 @@
-$ obj3 = [./ImportObjectSubstitutionImport.md] => {
+$ obj3 = [./ImportObjectSubstitutionImport.cmacc] => {
     "obj2": {
         "obj1": {
             "hello1": "World3"

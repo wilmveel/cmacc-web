@@ -1,0 +1,10 @@
+$ obj3 = [./VariableObject.cmacc] => {
+    "obj1" : {
+        "hello1" : "World3"
+    }
+}
+
+$ obj2 = [./VariableString.cmacc] => {
+    "hello1": obj3
+}
+

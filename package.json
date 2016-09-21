@@ -1,0 +1,17 @@
+{
+  "name": "cmacc-compiler",
+  "version": "1.0.1",
+  "description": "Cmacc Compiler",
+  "main": "src/cmacc.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "marked": "^0.3.5",
+    "request": "^2.74.0",
+    "resolve-url": "^0.2.1"
+  },
+  "scripts":{
+    "test" : "mocha test --recursive"
+  }
+}

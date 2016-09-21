@@ -91,7 +91,7 @@ describe('convert', function () {
                     var result = convert(file);
                     console.log(JSON.stringify(result, null, 4));
                 } catch (e) {
-                    assert.equal(e.message, 'SyntaxError: Unexpected token =');
+                    assert.equal(e.message, 'Unexpected token =');
                     assert.equal(e.file, '/Users/willemveelenturf/projects/commonaccord/common-accourd-js/test/convert/InvalidJson.cmacc');
                     done();
                 }
@@ -106,7 +106,7 @@ describe('convert', function () {
                     var result = convert(file);
                     console.log(JSON.stringify(result, null, 4));
                 } catch (e) {
-                    assert.equal(e.message, 'SyntaxError: Unexpected token =');
+                    assert.equal(e.message, 'Unexpected token =');
                     assert.equal(e.file, '/Users/willemveelenturf/projects/commonaccord/common-accourd-js/test/convert/InvalidJson.cmacc');
                     done();
                 }
@@ -123,8 +123,24 @@ describe('convert', function () {
                     done()
                 } catch (e) {
                     console.log(e)
-                    assert.equal(e.message, 'SyntaxError: Unexpected token ILLEGAL');
+                    assert.equal(e.message, 'Unexpected token ILLEGAL');
                     assert.equal(e.file, '/Users/willemveelenturf/projects/commonaccord/common-accourd-js/test/convert/InvalidString.cmacc');
+                    done();
+                }
+            });
+        });
+
+        describe('FileNotFound.cmacc', function () {
+            it('should convert FileNotFound.cmacc', function (done) {
+                var file = path.join(__dirname, 'convert', 'FileNotFound.cmacc');
+
+                try {
+                    var result = convert(file);
+                    console.log(JSON.stringify(result, null, 4));
+                    done()
+                } catch (e) {
+                    console.log(e)
+                    assert.equal(e.message, 'ENOENT: no such file or directory, open \'/Users/willemveelenturf/projects/commonaccord/common-accourd-js/test/convert/FileNotFound.cmacc\'');
                     done();
                 }
             });

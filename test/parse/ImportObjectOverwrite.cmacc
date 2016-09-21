@@ -1,4 +1,4 @@
-$ obj2 = [./Object.md] => {
+$ obj2 = [./VariableObject.cmacc] => {
     "obj1" : {
         "hello1" : "World2"
     }
