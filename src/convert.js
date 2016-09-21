@@ -58,6 +58,7 @@ function convert(file) {
     try{
         return eval(res);
     }catch (e){
+        e.res = res;
         e.file = file;
         throw(e)
     }

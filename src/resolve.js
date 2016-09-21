@@ -1,5 +1,5 @@
 function resolve(obj){
-    if (obj.text && obj.vars) {
+    if (obj && obj.text && obj.vars) {
         var keys = Object.keys(obj.vars);
         for (var i = 0; i < keys.length; i++) {
             if (obj.vars[keys[i]].vars) {

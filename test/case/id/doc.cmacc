@@ -1,0 +1,7 @@
+$ person = [./WillemVeelenturf.cmacc]
+
+$ person_na = [./_person_na.cmacc] => {
+    person : person
+}
+
+{{person_na}}

@@ -1,0 +1,3 @@
+$ person = [./_person.cmacc]
+
+Name: {{person.firstName}} {{person.lastName}}
