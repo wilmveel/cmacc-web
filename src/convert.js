@@ -17,10 +17,6 @@ function convert(file) {
         throw(e)
     }
 
-    // Add enter for failing regex
-    if(text.slice(-1) !== '\n')
-        text = text + '\n';
-
     var md = text.replace(regex.REGEX_VARIABLE, function (match, key, ref, val) {
         vars.push(key);
         res += 'var ' + key + ' = ';

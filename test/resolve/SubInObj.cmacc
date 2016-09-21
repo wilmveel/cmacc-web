@@ -1,0 +1,8 @@
+$ sub = "sub"
+
+$ obj = {
+    world: "World",
+    hello: "Hello"
+}
+
+{{obj.hello}} {{obj.world}}

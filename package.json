@@ -11,7 +11,10 @@
     "request": "^2.74.0",
     "resolve-url": "^0.2.1"
   },
-  "scripts":{
-    "test" : "mocha test --recursive"
+  "scripts": {
+    "test": "mocha test --recursive"
+  },
+  "bin": {
+    "cmacc": "./bin/run.js"
   }
 }

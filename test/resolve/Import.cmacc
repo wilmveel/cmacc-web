@@ -1,0 +1,5 @@
+$ imp = [./Object.cmacc]
+
+{{imp}}
+
+Text
