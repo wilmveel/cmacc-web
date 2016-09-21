@@ -1,34 +1,27 @@
-var assert = require('assert');
-var path = require('path');
 var fs = require('fs');
+var md = require('marked');
+var path = require('path');
 
-var marked = require('marked');
+var index = require('./src/index');
 
-var cmacc = require('./src/cmacc');
+var convert = index.convert;
+var parse = index.parse;
+var resolve = index.resolve;
 
-var input = process.argv[2];
+var input = process.argv[2] || './test/doc/HelloWorld.cmacc';
 
-var file = path.join(__dirname, input);
+var file = convert(path.join(__dirname, input));
 
-file = 'file://' + file;
+var ast = parse(file);
 
-console.log(file)
+var resolved = resolve(ast);
 
-cmacc.compose(file, null, function (err, ast) {
+var rendered = md(resolved);
 
-    fs.writeFileSync('run.json', JSON.stringify(ast, null, 4))
+output(rendered);
 
-    cmacc.render(ast, function (err, markdown) {
-
-        var html = marked(markdown)
-
-        console.log("---MARKDOWN---\n");
-        console.log(markdown + "\n");
-
-        console.log("---HTML---\n");
-        console.log(html);
-
-        fs.writeFileSync('run.md', markdown)
-        fs.writeFileSync('run.html', html)
-    });
-});
+function output(result) {
+    // console.log('result: \n', result);
+    console.log('args: ', process.argv);
+    fs.writeFileSync('./index.html', result);
+}

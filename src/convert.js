@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var url = require('url');
 
 var marked = require('marked');
 var regex = require('./regex');
@@ -14,8 +15,18 @@ function convert(file) {
         vars.push(key);
         res += 'var ' + key + ' = ';
         if (ref) {
-            var dir = path.dirname(file);
-            var resolve = path.resolve(dir, ref);
+            var obj = url.parse(ref);
+
+            // absolute path
+            if(obj.protocol){
+                var resolve = ref;
+
+            // relative path
+            }else{
+                var dir = path.dirname(file);
+                var resolve = path.resolve(dir, ref);
+            }
+
             res += '{\tfile : "' + resolve + '",\n';
             if (val) res += '\tvars : ' + val + '}\n';
             else if (!val) res += '}';
