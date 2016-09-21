@@ -1,8 +1,7 @@
 var cmacc = {
     helper: require('./helper'),
-    parser: require('./parser'),
-    compose: require('./compose'),
-    render: require('./render'),
+    convert: require('./convert'),
+    resolve: require('./resolve'),
     serialize: require('./serialize'),
     marked: require('marked')
 };

@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 
 var marked = require('marked');
-var regex = require('../regex');
+var regex = require('./regex');
 
 function convert(file) {
     var res = '';

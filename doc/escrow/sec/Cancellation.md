@@ -1,3 +1,0 @@
-$ timeMax = null
-
-Cancellation. If the Seller fails to deliver the Products to the Shipper by {{timeMax}}, the Purchaser shall have the option to cancel the Transaction ("Cancellation") at any time after {Pickup.Time.Max} and before the Shipper notifies the Escrow Agent that Shipper has received the Products from Seller. If there is a Cancellation, the Escrow Agent shall return the Purchase Price to the Purchaser and the Purchaser shall have no other obligation to the Seller.
