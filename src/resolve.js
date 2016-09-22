@@ -9,7 +9,7 @@ function resolve(obj) {
                 var vars = Object.keys(obj.vars[keys[i]].vars);
                 for (var j = 0; j < vars.length; j++) {
                     if (typeof obj.vars[keys[i]].vars[vars[j]] === 'string') {
-                        obj.vars[keys[i]].vars[vars[j]] = replace(obj.vars[keys[i]].vars[vars[j]], obj.vars[keys[i]]);
+                        obj.vars[keys[i]].vars[vars[j]] = replaceVars(obj.vars[keys[i]].vars[vars[j]], obj.vars[keys[i]]);
                     }
                 }
 
@@ -18,7 +18,7 @@ function resolve(obj) {
             }
 
             // replace vars in text
-            obj.text = replace(obj.text, obj);
+            obj.text = replaceVars(obj.text, obj);
 
         }
         return obj.text;
@@ -26,7 +26,7 @@ function resolve(obj) {
     return obj;
 }
 
-function replace(str, obj) {
+function replaceVars(str, obj) {
 
     return str.replace(/{{\w+.\w+}}/g, function (x) {
         var qry = x.slice(2, -2);
