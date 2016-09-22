@@ -15,7 +15,6 @@ function parse(js) {
             js.vars = next.vars;
         }
 
-
         js.text = next.text;
         js.type = next.type;
         delete js.file;

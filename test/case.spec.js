@@ -16,7 +16,6 @@ describe('parse', function () {
     var run = function (file) {
         var js = convert(file);
         var ast = parse(js);
-        console.log(JSON.stringify(ast,null,4));
         var result = resolve(ast);
         return result;
     };
@@ -37,7 +36,7 @@ describe('parse', function () {
 
             var result = run(file);
 
-            assert.equal(result, "Name: Willem Veelenturf Veelenturf Willem 123");
+            assert.equal(result, "Name: Willem Veelenturf Veelenturf Willem 1234");
             done()
 
         });
