@@ -2,4 +2,6 @@ $ firstName = "firstName"
 
 $ lastName = "lastName"
 
+$ fullName = "{{firstName}} {{lastName}}"
+
 $ city = "city"

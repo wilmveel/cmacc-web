@@ -16,7 +16,7 @@ describe('parse', function () {
     var run = function (file) {
         var js = convert(file);
         var ast = parse(js);
-        //console.log(JSON.stringify(ast,null,4));
+        console.log(JSON.stringify(ast,null,4));
         var result = resolve(ast);
         return result;
     };
@@ -27,7 +27,7 @@ describe('parse', function () {
 
                 var result = run(file);
 
-                assert.equal(result, "Name: Willem Veelenturf");
+                assert.equal(result, "Name: Willem Veelenturf Willem Veelenturf");
                 done()
 
 
