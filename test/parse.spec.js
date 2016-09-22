@@ -139,16 +139,16 @@ describe('parse', function () {
     });
 
     describe('Change', function () {
-        describe('ImportVariable.cmacc', function () {
-            xit('should parse ImportVariable.cmacc', function (done) {
-                var file = path.join(__dirname, 'parse', 'ImportVariable.cmacc');
+        describe('ImportObject.cmacc', function () {
+            it('should parse ImportObject.cmacc', function (done) {
+                var file = path.join(__dirname, 'parse', 'ImportObject.cmacc');
 
                 var js = convert(file);
                 var result = parse(js);
 
-                result.vars.obj2.vars.hello1 = 'World2';
+                result.vars.obj2.vars.hello1 = 'World5';
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj2.vars.hello1, 'World2');
+                assert.equal(result.vars.obj2.vars.hello1, 'World5');
 
                 done()
             });
