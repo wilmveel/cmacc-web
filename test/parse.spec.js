@@ -179,7 +179,6 @@ describe('parse', function () {
                 var result = parse(js);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.vars.hello1.hello1, 'World1');
                 assert.equal(result.vars.obj.vars.hello1.hello2, 'World2');
                 done()
             });

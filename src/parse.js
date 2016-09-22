@@ -1,5 +1,6 @@
 var path = require('path');
 var convert = require('./convert');
+var merge = require('./merge').merge;
 
 function parse(js) {
 
@@ -15,7 +16,7 @@ function parse(js) {
                 if (js.vars[key]) {
                 }
                 else {
-                    js.vars[key] = parse(next.vars[key]);
+                    js.vars[key] = merge(js.vars[key], parse(next.vars[key]));
                 }
             });
         }
