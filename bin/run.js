@@ -11,18 +11,17 @@ var parse = index.parse;
 var resolve = index.resolve;
 
 var input = process.argv[2] || './index.cmacc';
-var output = process.argv[3] || path.basename(input, path.extname(input)) + '.html'
-
-var file = convert(path.resolve(process.cwd(), input));
+var output = process.argv[3] || path.basename(input, path.extname(input))
 
 try{
+    var file = convert(path.resolve(process.cwd(), input));
     var ast = parse(file);
-    console.log(ast)
+    fs.writeFileSync(path.resolve(process.cwd(), output+ '.json'), JSON.stringify(ast, null, 4));
     var resolved = resolve(ast);
     var rendered = md(resolved);
 }catch (e){
-    console.error(e)
+    console.error(e.message);
+    console.error(e.file);
 }
 
-
-fs.writeFileSync(path.resolve(process.cwd(), output), rendered);
+fs.writeFileSync(path.resolve(process.cwd(), output+ '.html'), rendered);

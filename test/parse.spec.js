@@ -198,4 +198,84 @@ describe('parse', function () {
         });
     });
 
+    describe('Merge', function () {
+
+        describe('MergeSimple.cmacc', function () {
+            it('should parse MergeSimple.cmacc', function (done) {
+                var file = path.join(__dirname, 'parse', 'MergeSimple.cmacc');
+
+                var js = convert(file);
+                var result = parse(js);
+
+                console.log(JSON.stringify(result, null, 4));
+                assert.equal(result.vars.obj.vars.hello2, 'World1');
+                assert.equal(result.vars.obj.vars.hello1.hello1, 'World1');
+                done()
+            });
+        });
+
+        describe('MergeDepth.cmacc', function () {
+            it('should parse MergeDepth.cmacc', function (done) {
+                var file = path.join(__dirname, 'parse', 'MergeDepth.cmacc');
+
+                var js = convert(file);
+                var result = parse(js);
+
+                console.log(JSON.stringify(result, null, 4));
+                assert.equal(result.vars.obj.vars.hello1.hello2, 'World2');
+                done()
+            });
+        });
+
+    });
+
+    describe('Text', function () {
+        describe('TextSimple.cmacc', function () {
+            it('should parse TextSimple.cmacc', function (done) {
+                var file = path.join(__dirname, 'parse', 'TextSimple.cmacc');
+
+                var js = convert(file);
+                var result = parse(js);
+
+                console.log(JSON.stringify(result, null, 4));
+                assert.equal(result.vars.test, 'Hello');
+                assert.equal(result.text, '{{test}} World');
+                done()
+            });
+        });
+
+        describe('TextImport.cmacc', function () {
+            it('should parse TextImport.cmacc', function (done) {
+                var file = path.join(__dirname, 'parse', 'TextImport.cmacc');
+
+                var js = convert(file);
+                var result = parse(js);
+
+                console.log(JSON.stringify(result, null, 4));
+
+                assert.equal(result.vars.test.vars.test, 'Hello');
+                assert.equal(result.vars.test.text, '{{test}} World');
+                assert.equal(result.text, '{{test}}');
+                done()
+            });
+        });
+    });
+
+    describe('Deep', function () {
+        describe('DeeperVars.cmacc', function () {
+            it('should parse DeeperVars.cmacc', function (done) {
+                var file = path.join(__dirname, 'parse', 'DeeperVars.cmacc');
+
+                var js = convert(file);
+                var result = parse(js);
+
+                console.log(JSON.stringify(result, null, 4));
+                assert.equal(result.vars.test, 'Hello');
+                assert.equal(result.text, '{{test}} World');
+                done()
+            });
+        });
+
+    });
+
 });

@@ -1,0 +1,3 @@
+$ test = [./TextSimple.cmacc]
+
+{{test}}
