@@ -3,7 +3,8 @@
   "description": "Common Accord",
   "main": "index.js",
   "authors": [
-    "Willem Veelenturf <willem.veelenturf@gmail.com>"
+    "Willem Veelenturf <willem.veelenturf@gmail.com>",
+    "Jerre van Veluw <jerrevanveluw@users.noreply.github.com>"
   ],
   "license": "ISC",
   "moduleType": [],
