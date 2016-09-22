@@ -30,8 +30,15 @@ describe('parse', function () {
                 assert.equal(result, "Name: Willem Veelenturf Willem Veelenturf");
                 done()
 
+        });
 
+        it('should parse doc_overwrite.cmacc', function (done) {
+            var file = path.join(__dirname, 'case', './id/doc_overwrite.cmacc');
 
+            var result = run(file);
+
+            assert.equal(result, "Name: Willem Veelenturf Veelenturf Willem 123");
+            done()
 
         });
     });

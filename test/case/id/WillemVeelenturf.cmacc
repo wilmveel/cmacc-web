@@ -2,6 +2,4 @@ $ firstName = "Willem"
 
 $ lastName = "Veelenturf"
 
-$ fullName = "{{firstName}} {{lastName}}"
-
 $ city = "Utrecht"

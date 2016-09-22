@@ -1,0 +1,11 @@
+$ fullName = "{{lastName}} {{firstName}} 123"
+
+$ person = [./WillemVeelenturf.cmacc] => {
+    fullName : fullName
+}
+
+$ person_na = [./_person_na.cmacc] => {
+    person : person
+}
+
+{{person_na}}
