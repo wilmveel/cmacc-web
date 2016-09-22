@@ -3,7 +3,7 @@ function resolve(obj) {
         var keys = Object.keys(obj.vars);
         for (var i = 0; i < keys.length; i++) {
 
-            if (obj.vars[keys[i]].vars) {
+            if (obj.vars[keys[i]] && obj.vars[keys[i]].vars) {
 
                 // replace vars in vars
                 var vars = Object.keys(obj.vars[keys[i]].vars);
