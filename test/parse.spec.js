@@ -269,7 +269,7 @@ describe('parse', function () {
                 var js = convert(file);
                 var result = parse(js);
 
-                console.log(JSON.stringify(result, null, 4));
+                console.log(JSON.stringify(js, null, 4));
                 assert.equal(result.vars.test, 'Hello');
                 assert.equal(result.text, '{{test}} World');
                 done()

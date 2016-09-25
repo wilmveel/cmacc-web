@@ -8,14 +8,14 @@ var marked = require('marked');
 var cmacc = require('../src/index');
 var convert = cmacc.convert;
 
-describe('convert', function () {
+describe('Convert', function () {
 
     describe('Variable', function () {
         describe('Variable.cmacc', function () {
             it('should convert Variable.cmacc', function (done) {
                 var file = path.join(__dirname, 'convert', 'Variable.cmacc');
                 var result = convert(file);
-                console.log(JSON.stringify(result, null, 4));
+                log(result);
                 assert.equal(result.vars.hello1, 'World1');
                 done()
             });
@@ -25,7 +25,7 @@ describe('convert', function () {
             it('should convert Object.cmacc', function (done) {
                 var file = path.join(__dirname, 'convert', 'Object.cmacc');
                 var result = convert(file);
-                console.log(JSON.stringify(result, null, 4));
+                log(result);
                 assert.equal(result.vars.str, 'Lala');
                 assert.equal(result.vars.obj1.hello1, 'Lala');
                 done()
@@ -36,7 +36,7 @@ describe('convert', function () {
             it('should convert ObjectNested.cmacc', function (done) {
                 var file = path.join(__dirname, 'convert', 'ObjectNested.cmacc');
                 var result = convert(file);
-                console.log(JSON.stringify(result, null, 4));
+                log(result);
                 assert.equal(result.vars.str, 'Lala');
                 assert.equal(result.vars.obj1.hello1.str, 'Lala');
                 done()
@@ -44,77 +44,70 @@ describe('convert', function () {
         });
     });
 
-    describe('Import', function () {
-
-        describe('ImportFile.cmacc', function () {
-            it('should convert ImportFile.cmacc', function (done) {
-                var file = path.join(__dirname, 'convert', 'ImportFile.cmacc');
-                var result = convert(file);
-                console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.file, 'file:///User/name/test.cmacc');
-                assert.equal(result.text, '');
-                done();
-            });
+    describe('and import', function () {
+        it('should convert ImportFile.cmacc', function (done) {
+            var file = 'ImportFile.cmacc';
+            var shouldBe = 'file:///User/name/test.cmacc';
+            importAndConvert(done, file, shouldBe);
         });
 
-        describe('ImportHttp.cmacc', function () {
-            it('should convert ImportHttp.cmacc', function (done) {
-                var file = path.join(__dirname, 'convert', 'ImportHttp.cmacc');
-                var result = convert(file);
-                console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.file, 'http://test.nl/test.cmacc');
-                assert.equal(result.text, '');
-                done();
-            });
+        it('should convert ImportHttp.cmacc', function (done) {
+            var file = 'ImportHttp.cmacc';
+            var shouldBe = 'http://test.nl/test.cmacc';
+            importAndConvert(done, file, shouldBe);
         });
 
-        describe('ImportRel.cmacc', function () {
-            it('should convert ImportRel.cmacc', function (done) {
-                var file = path.join(__dirname, 'convert', 'ImportRel.cmacc');
-                var result = convert(file);
-                console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.file, __dirname + '/convert/Test.md');
-                assert.equal(result.text, '');
-                done();
-            });
+        it('should convert ImportRel.cmacc', function (done) {
+            var file = 'ImportRel.cmacc';
+            var shouldBe = __dirname + '/convert/Test.md';
+            importAndConvert(done, file, shouldBe);
+
         });
     });
 
-    describe('Invalid', function () {
-        describe('InvalidJson.cmacc', function () {
-            it('should convert InvalidJson.cmacc', function (done) {
-                var file = path.join(__dirname, 'convert', 'InvalidJson.cmacc');
-                testInvalidFile(file, 'Unexpected token =');
-                done();
-            });
+    describe('The interpreter', function () {
+        it('should invalidate InvalidJson.cmacc because of an unexpected token', function (done) {
+            var file = path.join(__dirname, 'convert', 'InvalidJson.cmacc');
+            var shouldBe = 'Unexpected token =';
+            testInvalidFile(done, file, shouldBe);
         });
 
-        describe('InvalidString.cmacc', function () {
-            it('should convert InvalidString.cmacc', function (done) {
-                var file = path.join(__dirname, 'convert/InvalidString.cmacc');
-                testInvalidFile(file, 'Unexpected token ILLEGAL');
-                done();
-            });
+        it('should invalidate InvalidString.cmacc because of an illegal token', function (done) {
+            var file = path.join(__dirname, 'convert/InvalidString.cmacc');
+            var shouldBe = 'Unexpected token ILLEGAL';
+            testInvalidFile(done, file, shouldBe);
         });
 
-        describe('FileNotFound.cmacc', function () {
-            it('should convert FileNotFound.cmacc', function (done) {
-                var file = path.join(__dirname, 'convert/FileNotFound.cmacc');
-                testInvalidFile(file, 'ENOENT: no such file or directory, open \'' + file + '\'');
-                done();
-            });
+        it('should invalidate FileNotFound.cmacc because of a file not found', function (done) {
+            var file = path.join(__dirname, 'convert/FileNotFound.cmacc');
+            var shouldBe = 'ENOENT: no such file or directory, open \'' + file + '\'';
+            testInvalidFile(done, file, shouldBe);
         });
     });
 });
 
 //helper functions:
-function testInvalidFile(file, assertString) {
+function importAndConvert(done, file, shouldBe) {
+    file = path.join(__dirname, 'convert', file);
+    var result = convert(file);
+    log(result);
+    assert.equal(result.vars.obj.file, shouldBe);
+    assert.equal(result.text, '');
+    done();
+}
+
+function testInvalidFile(done, file, assertString) {
     try {
         var result = convert(file);
-        console.log(JSON.stringify(result, null, 4));
+        log(result);
         done()
     } catch (e) {
         console.log(e);
         assert.equal(e.message, assertString);
     }
+    done();
+}
+
+function log(obj) {
+    console.log(JSON.stringify(obj, null, 4));
 }

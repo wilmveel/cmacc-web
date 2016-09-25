@@ -11,9 +11,9 @@ function convert(file) {
 
     var text = null;
 
-    try{
+    try {
         text = fs.readFileSync(file, 'utf8');
-    }catch (e){
+    } catch (e) {
         throw(e)
     }
 
@@ -22,15 +22,16 @@ function convert(file) {
         res += 'var ' + key + ' = ';
         if (ref) {
             var obj = url.parse(ref);
+            var resolve;
 
             // absolute path
-            if(obj.protocol){
-                var resolve = ref;
+            if (obj.protocol) {
+                resolve = ref;
 
             // relative path
-            }else{
+            } else {
                 var dir = path.dirname(file);
-                var resolve = path.resolve(dir, ref);
+                resolve = path.resolve(dir, ref);
             }
 
             res += '{\tfile : "' + resolve + '",\n';
@@ -38,9 +39,9 @@ function convert(file) {
             else if (!val) res += '}';
         } else if (!ref) {
             if (val)
-                res+= val;
+                res += val;
             else
-                res+= 'null';
+                res += 'null';
         }
         res += ';\n\n';
         return '';
@@ -48,16 +49,16 @@ function convert(file) {
 
     res += 'module.exports = {' + '\n';
     res += 'vars : {' + '\n';
-    res += vars.map(function(vari){
+    res += vars.map(function (vari) {
             return '\t' + vari + ' : ' + vari
         }).join(',') + '\n';
     res += '},' + '\n';
     res += 'text : ' + JSON.stringify(md, null, 4) + '\n';
     res += '};' + '\n';
 
-    try{
+    try {
         return eval(res);
-    }catch (e){
+    } catch (e) {
         e.res = res;
         e.file = file;
         throw(e)
