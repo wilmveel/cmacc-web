@@ -4,6 +4,8 @@ var url = require('url');
 
 var marked = require('marked');
 var regex = require('./regex');
+var merge = require('./merge');
+var imp = require('./import');
 
 function convert(file) {
     var res = '';
@@ -28,15 +30,19 @@ function convert(file) {
             if (obj.protocol) {
                 resolve = ref;
 
+            }
             // relative path
-            } else {
+            else {
                 var dir = path.dirname(file);
                 resolve = path.resolve(dir, ref);
             }
 
-            res += '{\tfile : "' + resolve + '",\n';
-            if (val) res += '\tvars : ' + val + '}\n';
-            else if (!val) res += '}';
+            if (val) {
+                res += 'merge.merge(' + JSON.stringify(convert(resolve)) + ',' + val + ')';
+            } else {
+                res += JSON.stringify(convert(resolve));
+            }
+
         } else if (!ref) {
             if (val)
                 res += val;
@@ -47,14 +53,15 @@ function convert(file) {
         return '';
     });
 
-    res += 'module.exports = {' + '\n';
-    res += 'vars : {' + '\n';
+    res += 'module.exports = {';
     res += vars.map(function (vari) {
             return '\t' + vari + ' : ' + vari
-        }).join(',') + '\n';
-    res += '},' + '\n';
-    res += 'text : ' + JSON.stringify(md, null, 4) + '\n';
-    res += '};' + '\n';
+        }).join(',') + ',';
+    res += '$$text$$ : ' + JSON.stringify(md) + ',';
+    res += '$$file$$ : ' + JSON.stringify(file);
+    res += '};';
+
+    // console.log("========================\n", res);
 
     try {
         return eval(res);

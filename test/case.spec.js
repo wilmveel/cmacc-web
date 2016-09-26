@@ -10,12 +10,10 @@ describe('parse', function () {
     var cmacc = require('../src/index');
 
     var convert = cmacc.convert;
-    var parse = cmacc.parse;
     var resolve = cmacc.resolve;
 
     var run = function (file) {
-        var js = convert(file);
-        var ast = parse(js);
+        var ast = convert(file);
         var result = resolve(ast);
         return result;
     };

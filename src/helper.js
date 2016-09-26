@@ -1,5 +1,3 @@
-var mergeJson = require("./merge");
-
 var helper = {
 
     mergeJson: function (obj1, obj2) {

@@ -9,7 +9,6 @@ describe('parse', function () {
 
     var cmacc = require('../src/index');
     var convert = cmacc.convert;
-    var parse = cmacc.parse;
 
     describe('Variable', function () {
 
@@ -17,11 +16,10 @@ describe('parse', function () {
             it('should parse VariableEmpty.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'VariableEmpty.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.hello1, null);
+                assert.equal(result.hello1, null);
 
                 done()
             });
@@ -31,11 +29,10 @@ describe('parse', function () {
             it('should parse VariableNull.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'VariableNull.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.hello1, null);
+                assert.equal(result.hello1, null);
 
                 done()
             });
@@ -45,11 +42,10 @@ describe('parse', function () {
             it('should parse VariableString.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'VariableString.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.hello1, 'World1');
+                assert.equal(result.hello1, 'World1');
 
                 done()
             });
@@ -59,11 +55,10 @@ describe('parse', function () {
             it('should parse VariableObject.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'VariableObject.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.hello1.hello1, 'World1');
+                assert.equal(result.hello1.hello1, 'World1');
 
                 done()
             });
@@ -77,11 +72,10 @@ describe('parse', function () {
             it('should parse ImportObject.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'ImportObject.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj2.vars.hello1.hello1, 'World1');
+                assert.equal(result.obj2.hello1.hello1, 'World1');
                 done()
             });
         });
@@ -90,12 +84,11 @@ describe('parse', function () {
             it('should parse ImportObjectOverwrite.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'ImportObjectOverwrite.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj2.vars.obj1.hello1, 'World2');
-                assert.equal(result.vars.obj2.vars.hello1.hello1, 'World1');
+                assert.equal(result.obj2.obj1.hello1, 'World2');
+                assert.equal(result.obj2.hello1.hello1, 'World1');
                 done()
             });
         });
@@ -104,16 +97,15 @@ describe('parse', function () {
             it('should parse ImportObjectSubstitutionImport.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'ImportObjectSubstitutionImport.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
 
-                assert.equal(result.vars.obj3.vars.obj1.hello1, 'World3');
-                assert.equal(result.vars.obj3.vars.hello1.hello1, 'World1');
+                assert.equal(result.obj3.obj1.hello1, 'World3');
+                assert.equal(result.obj3.hello1.hello1, 'World1');
 
-                assert.equal(result.vars.obj2.vars.hello1.vars.obj1.hello1, 'World3');
-                assert.equal(result.vars.obj2.vars.hello1.vars.hello1.hello1, 'World1');
+                assert.equal(result.obj2.hello1.obj1.hello1, 'World3');
+                assert.equal(result.obj2.hello1.hello1.hello1, 'World1');
 
                 done()
             });
@@ -123,15 +115,14 @@ describe('parse', function () {
             it('should parse ImportObjectSubstitutionImportDouble.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'ImportObjectSubstitutionImportDouble.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
 
-                assert.equal(result.vars.obj3.vars.obj2.obj1.hello1, 'World3');
+                assert.equal(result.obj3.obj2.obj1.hello1, 'World3');
 
-                assert.equal(result.vars.obj3.vars.obj3.vars.obj1.hello1, 'World3');
-                assert.equal(result.vars.obj3.vars.obj3.vars.hello1.hello1, 'World1');
+                assert.equal(result.obj3.obj3.obj1.hello1, 'World3');
+                assert.equal(result.obj3.obj3.hello1.hello1, 'World1');
 
                 done()
             });
@@ -143,12 +134,11 @@ describe('parse', function () {
             it('should parse ImportObject.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'ImportObject.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
-                result.vars.obj2.vars.hello1 = 'World5';
+                result.obj2.hello1 = 'World5';
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj2.vars.hello1, 'World5');
+                assert.equal(result.obj2.hello1, 'World5');
 
                 done()
             });
@@ -161,12 +151,11 @@ describe('parse', function () {
             it('should parse MergeSimple.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'MergeSimple.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.vars.hello2, 'World1');
-                assert.equal(result.vars.obj.vars.hello1.hello1, 'World1');
+                assert.equal(result.obj.hello2, 'World1');
+                assert.equal(result.obj.hello1.hello1, 'World1');
                 done()
             });
         });
@@ -175,11 +164,10 @@ describe('parse', function () {
             it('should parse MergeDepth.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'MergeDepth.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.vars.hello1.hello2, 'World2');
+                assert.equal(result.obj.hello1.hello2, 'World2');
                 done()
             });
         });
@@ -188,11 +176,10 @@ describe('parse', function () {
             it('should parse MergeOverwrite.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'MergeOverwrite.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.vars.hello1.hello1, 'World2');
+                assert.equal(result.obj.hello1.hello1, 'World2');
                 done()
             });
         });
@@ -204,12 +191,11 @@ describe('parse', function () {
             it('should parse MergeSimple.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'MergeSimple.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.vars.hello2, 'World1');
-                assert.equal(result.vars.obj.vars.hello1.hello1, 'World1');
+                assert.equal(result.obj.hello2, 'World1');
+                assert.equal(result.obj.hello1.hello1, 'World1');
                 done()
             });
         });
@@ -218,11 +204,10 @@ describe('parse', function () {
             it('should parse MergeDepth.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'MergeDepth.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.obj.vars.hello1.hello2, 'World2');
+                assert.equal(result.obj.hello1.hello2, 'World2');
                 done()
             });
         });
@@ -234,12 +219,11 @@ describe('parse', function () {
             it('should parse TextSimple.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'TextSimple.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
-                assert.equal(result.vars.test, 'Hello');
-                assert.equal(result.text, '{{test}} World');
+                assert.equal(result.test, 'Hello');
+                assert.equal(result.$$text$$, '{{test}} World');
                 done()
             });
         });
@@ -248,14 +232,13 @@ describe('parse', function () {
             it('should parse TextImport.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'TextImport.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
                 console.log(JSON.stringify(result, null, 4));
 
-                assert.equal(result.vars.test.vars.test, 'Hello');
-                assert.equal(result.vars.test.text, '{{test}} World');
-                assert.equal(result.text, '{{test}}');
+                assert.equal(result.test.test, 'Hello');
+                assert.equal(result.test.$$text$$, '{{test}} World');
+                assert.equal(result.$$text$$, '{{test}}');
                 done()
             });
         });
@@ -266,12 +249,11 @@ describe('parse', function () {
             it('should parse DeeperVars.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'DeeperVars.cmacc');
 
-                var js = convert(file);
-                var result = parse(js);
+                var result = convert(file);
 
-                console.log(JSON.stringify(js, null, 4));
-                assert.equal(result.vars.test, 'Hello');
-                assert.equal(result.text, '{{test}} World');
+                console.log(JSON.stringify(result, null, 4));
+                assert.equal(result.test.test, 'World1');
+                assert.equal(result.obj.hello1.hello1, 'World1');
                 done()
             });
         });

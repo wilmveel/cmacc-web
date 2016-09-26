@@ -4,24 +4,24 @@ var request = require("request");
 
 var imp = {
 
-
-    readFile : function(file, callback){
+    readFileSync: function (file) {
 
         var parse = url.parse(file);
 
-        if(!parse.protocol)
-            return callback(null, file);
+        if (!parse.protocol) {
+            return file;
+        }
 
-        if(typeof window != 'undefined' && window.document){
+        if (typeof window != 'undefined' && window.document) {
 
             var call = '';
-            if(parse.protocol === "ipfs:")
-                call += '/ipfs/' + file.replace('ipfs://', '')
+            if (parse.protocol === "ipfs:")
+                call += '/ipfs/' + file.replace('ipfs://', '');
 
-            call += parse.path || '/'
+            call += parse.path || '/';
 
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
+            xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
                     callback(null, xhttp.responseText)
                 }
@@ -31,7 +31,7 @@ var imp = {
             return;
         }
 
-        if(parse.protocol === "http:"){
+        if (parse.protocol === "http:") {
             request(file, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     callback(null, body)
@@ -40,15 +40,13 @@ var imp = {
             return;
         }
 
-        if(parse.protocol === "ipfs:"){
+        if (parse.protocol === "ipfs:") {
 
         }
 
-        if(parse.protocol === "file:"){
-            fs.readFile(parse.path, 'utf8', callback);
+        if (parse.protocol === "file:") {
+            return fs.readFileSync(parse.path, 'utf8');
         }
-
-
 
     }
 
